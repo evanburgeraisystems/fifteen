@@ -18,6 +18,28 @@ async function profileFromText(text: string, nowIso: string): Promise<Profile> {
   return { ...parseProfile(text, nowIso), ...(fromModel ?? {}) };
 }
 
+/**
+ * A tab opened before a deploy still runs the old bundle, whose lazy pdf.js/mammoth chunks are gone from the
+ * server. Safari: "Importing a module script failed"; Chrome: "Failed to fetch dynamically imported module".
+ */
+function isStaleBuildError(e: unknown): boolean {
+  return e instanceof Error && /module script failed|dynamically imported module|error loading dynamically imported/i.test(e.message);
+}
+
+const RELOAD_KEY = 'fifteen.reloadedForUpdate';
+
+/** Reload to pick up the new build, at most once per tab session so a real outage can't loop. */
+function reloadOnce(): boolean {
+  try {
+    if (sessionStorage.getItem(RELOAD_KEY)) return false;
+    sessionStorage.setItem(RELOAD_KEY, '1');
+  } catch {
+    return false;
+  }
+  setTimeout(() => window.location.reload(), 1200);
+  return true;
+}
+
 /** Drop or pick a PDF/DOCX resume; parses it locally in the browser. */
 export function ResumeDrop({
   nowIso,
@@ -41,7 +63,12 @@ export function ResumeDrop({
       const p = await readProfile(file, nowIso);
       onParsed(p, file.name);
     } catch (e) {
-      setError(e instanceof ResumeReadError ? e.message : 'We couldn’t read that file. Try a PDF or Word (.docx) export.');
+      if (isStaleBuildError(e) && reloadOnce()) {
+        setError('The app was just updated. Reloading, then drop your resume again.');
+        return;
+      }
+      const detail = e instanceof Error && e.message ? ` (${e.message.slice(0, 120)})` : '';
+      setError(e instanceof ResumeReadError ? e.message : `We couldn’t read that file. Try a PDF or Word (.docx) export.${detail}`);
     } finally {
       setBusy(false);
     }

@@ -53,6 +53,10 @@ function loadPdfjs(): Promise<Pdfjs> {
     m.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/legacy/build/pdf.worker.min.mjs', import.meta.url).toString();
     return m;
   });
+  // A failed load (offline, or a stale tab after a deploy) must not stick for the rest of the session.
+  pdfjsModule.catch(() => {
+    pdfjsModule = null;
+  });
   return pdfjsModule;
 }
 
