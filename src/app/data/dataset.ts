@@ -46,6 +46,8 @@ export function requestedDataset(): DatasetId | null {
     }
     return q;
   }
+  // Demo links open in a new tab with no session: their ids say which dataset they belong to.
+  if (window.location.pathname.startsWith('/demo-posting/')) return 'demo';
   try {
     const s = sessionStorage.getItem(KEY);
     if (s === 'live' || s === 'demo' || s === 'demo-zero') return s;

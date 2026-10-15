@@ -7,6 +7,7 @@ import {
   useSensor,
   useSensors,
   type DragEndEvent,
+  type KeyboardCoordinateGetter,
 } from '@dnd-kit/core';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router';
@@ -27,10 +28,27 @@ export const STAGES: { id: TrackerStage; label: string }[] = [
 ];
 const STAGE_LABEL = Object.fromEntries(STAGES.map((s) => [s.id, s.label])) as Record<TrackerStage, string>;
 
+/**
+ * Keyboard dragging moves a card one whole column per arrow press
+ * (Left/Right, and Up/Down when columns stack on mobile), wherever the card sits.
+ */
+const columnCoordinates: KeyboardCoordinateGetter = (event, { context, currentCoordinates }) => {
+  const order = STAGES.map((s) => s.id);
+  const from = (context.over?.id ?? (context.active?.data.current as { stage?: TrackerStage } | undefined)?.stage) as TrackerStage | undefined;
+  const i = from ? order.indexOf(from) : -1;
+  const step = event.code === 'ArrowRight' || event.code === 'ArrowDown' ? 1 : event.code === 'ArrowLeft' || event.code === 'ArrowUp' ? -1 : 0;
+  if (i < 0 || step === 0) return currentCoordinates;
+  const target = order[Math.min(order.length - 1, Math.max(0, i + step))];
+  const rect = target ? context.droppableRects.get(target) : undefined;
+  if (!rect) return currentCoordinates;
+  event.preventDefault();
+  return { x: rect.left + 8, y: rect.top + 8 };
+};
+
 export function Tracker() {
   const { ds, state } = useApp();
   const [industries, setIndustries] = useState<IndustryId[]>([]);
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }), useSensor(KeyboardSensor));
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }), useSensor(KeyboardSensor, { coordinateGetter: columnCoordinates }));
 
   const cards = useMemo(
     () =>
@@ -192,7 +210,7 @@ function Column({ stage, label, cards, onMove }: { stage: TrackerStage; label: s
 }
 
 function TrackCard({ card, onMove }: { card: TrackerCard; onMove: (c: TrackerCard, to: TrackerStage) => void }) {
-  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: card.postingId });
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: card.postingId, data: { stage: card.stage } });
   const [notesOpen, setNotesOpen] = useState(card.notes.length > 0);
   const style = transform ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` } : undefined;
   const email = card.movedByEmail;

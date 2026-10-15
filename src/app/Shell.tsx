@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import { Icon, type IconName } from './components/Icon.tsx';
 import { ReturnPrompt } from './components/ReturnPrompt.tsx';
@@ -37,11 +37,16 @@ export function Shell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [navigate, loc.pathname]);
 
-  // Move focus to the page on navigation so screen readers announce the new screen.
+  // On navigation (not the first load), move focus to the page so screen readers
+  // announce the new screen. Skip it when the URL asks a screen to focus a field.
+  const prev = useRef(loc.pathname);
   useEffect(() => {
-    document.getElementById('main')?.focus({ preventScroll: true });
+    if (prev.current === loc.pathname) return;
+    prev.current = loc.pathname;
     window.scrollTo(0, 0);
-  }, [loc.pathname]);
+    if (new URLSearchParams(loc.search).has('focus')) return;
+    document.getElementById('main')?.focus({ preventScroll: true });
+  }, [loc.pathname, loc.search]);
 
   return (
     <div className="shell">

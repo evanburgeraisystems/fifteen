@@ -132,6 +132,15 @@ export function bindStore(datasetId: string): void {
   for (const l of listeners) l();
 }
 
+if (typeof window !== 'undefined') {
+  // Another tab saved newer state: take it instead of overwriting it later.
+  window.addEventListener('storage', (e) => {
+    if (e.key !== KEY || e.newValue == null) return;
+    state = load();
+    for (const l of listeners) l();
+  });
+}
+
 export function getState(): AppState {
   return state;
 }

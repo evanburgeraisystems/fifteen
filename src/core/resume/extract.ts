@@ -54,7 +54,8 @@ function loadPdfjs(): Promise<typeof import('pdfjs-dist')> {
 
 async function pdfToText(data: Uint8Array): Promise<string> {
   const pdfjs = await loadPdfjs();
-  const task = pdfjs.getDocument({ data, useSystemFonts: false });
+  // Text extraction only; the standard fonts are served by the pdfjs-standard-fonts Vite plugin.
+  const task = pdfjs.getDocument({ data, useSystemFonts: false, standardFontDataUrl: '/pdfjs/standard_fonts/' });
   let doc: PDFDocumentProxy;
   try {
     doc = await task.promise;
