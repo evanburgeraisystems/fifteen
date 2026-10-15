@@ -200,7 +200,7 @@ function NotificationPreview({ ranked, starCompanies }: { ranked: ReturnType<typ
     const t = state.targets;
     const c = { perfect: 0, almost: 0, weak: 0 };
     for (const r of ranked) {
-      if (r.posting.firstSeen !== ds.pullDate || r.fit.tier === 'nonfit') continue;
+      if (!ds.isFresh(r.posting) || r.fit.tier === 'nonfit') continue;
       const p = r.posting;
       if (t && (!t.industries.includes(p.classification.industry) || !t.careers.includes(p.classification.career) || !p.cities.some((x) => t.cities.includes(x)))) continue;
       c[r.fit.tier]++;

@@ -14,7 +14,7 @@ import { Stars } from './screens/Stars.tsx';
 import { Tracker } from './screens/Tracker.tsx';
 import { Shell } from './Shell.tsx';
 import { AppProvider, useApp } from './state/app-context.tsx';
-import { actions, useAppState } from './state/store.ts';
+import { actions, bindStore, useAppState } from './state/store.ts';
 
 function useTheme() {
   const { theme } = useAppState();
@@ -47,6 +47,7 @@ export function App() {
     loadDataset()
       .then((d) => {
         if (!alive) return;
+        bindStore(d.id);
         setDs(d);
         setError(null);
         actions.beginVisit();

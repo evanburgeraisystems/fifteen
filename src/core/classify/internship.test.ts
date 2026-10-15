@@ -65,3 +65,12 @@ describe('detectInternship: negatives', () => {
     expect(detectInternship('Operations Associate', 'You will work alongside our interns and fellows.')).toBe(false);
   });
 });
+
+describe('early-career titles (live-data regressions)', () => {
+  it('new-grad and recruiter "early career" roles are not internships', () => {
+    expect(detectInternship('Software Engineer, Early Career (NYC)', '')).toBe(false);
+    expect(detectInternship('Early Career Talent Partner - Trading', '')).toBe(false);
+    expect(detectInternship('IT Engineer Intern (Early Careers Summer 2027)', '')).toBe(true);
+    expect(detectInternship('Early Insight Program - Sales & Trading', '')).toBe(true);
+  });
+});

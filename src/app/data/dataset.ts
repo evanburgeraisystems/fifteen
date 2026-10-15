@@ -8,6 +8,8 @@
  * Choose with ?dataset=live|demo|demo-zero (remembered for the tab session).
  * Default: live when a live snapshot with business internships exists, else demo.
  */
+import { isFreshOnPull } from '../../core/fresh.ts';
+import { isUsOrRemote } from '../../core/geo.ts';
 import { familyOf } from '../../core/taxonomy.ts';
 import type { HistoryFile, Posting, Snapshot } from '../../core/types.ts';
 
@@ -18,13 +20,15 @@ export interface Dataset {
   isDemo: boolean;
   snapshot: Snapshot;
   history: HistoryFile | null;
-  /** Postings a student can see: internships, business family, link verified on the latest pull. */
+  /** Postings a student can see: US or remote internships, business family, link verified on the latest pull. */
   visible: Posting[];
   /** The date the "new today" badge refers to (the latest pull). */
   pullDate: string;
   /** ISO "now" the app reasons with. Demo data pins the calendar day to the snapshot. */
   nowIso: () => string;
   byId: Map<string, Posting>;
+  /** Appeared on the latest pull (first-day aware). */
+  isFresh: (p: Posting) => boolean;
 }
 
 /** MVP ships business roles; the data and model carry every family. */
@@ -80,7 +84,8 @@ export function isVisible(p: Posting, pullDate: string): boolean {
     p.linkStatus === 'ok' &&
     p.linkVerifiedAt != null &&
     p.linkVerifiedAt.slice(0, 10) === pullDate &&
-    ENABLED_FAMILIES.has(familyOf(p.classification.career))
+    ENABLED_FAMILIES.has(familyOf(p.classification.career)) &&
+    isUsOrRemote(p)
   );
 }
 
@@ -94,7 +99,8 @@ export function buildDataset(id: DatasetId, snapshot: Snapshot, history: History
         return `${pullDate}T${t.toISOString().slice(11)}`;
       }
     : () => new Date().toISOString();
-  return { id, isDemo, snapshot, history, visible, pullDate, nowIso, byId: new Map(visible.map((p) => [p.id, p])) };
+  const isFresh = (p: Posting) => isFreshOnPull(p, pullDate, snapshot.trackingSince);
+  return { id, isDemo, snapshot, history, visible, pullDate, nowIso, byId: new Map(visible.map((p) => [p.id, p])), isFresh };
 }
 
 export async function loadDataset(): Promise<Dataset> {

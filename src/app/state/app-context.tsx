@@ -65,7 +65,7 @@ export function AppProvider({ ds, children }: { ds: Dataset; children: ReactNode
 
   const value = useMemo<AppCtx>(() => {
     const isNew = (p: Posting) => {
-      if (p.firstSeen !== ds.pullDate) return false;
+      if (!ds.isFresh(p)) return false;
       if (statuses[p.id]) return false;
       const s = seen[p.id];
       // A New badge stays for the visit it was first seen in, then clears.

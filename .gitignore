@@ -9,3 +9,5 @@ e2e/__screens__/
 .env.*
 !.env.example
 .DS_Store
+.vitest/
+*.tsbuildinfo

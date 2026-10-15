@@ -156,3 +156,10 @@ describe('classifyRole: other behaviors', () => {
     expect(classifyRole({ title: 'Internal Audit Intern', department: null, description: '', companyIndustry: 'finance' }).career).toBe('accounting');
   });
 });
+
+describe('hardware internships stay out of business careers (live-data regression)', () => {
+  it.each(['Avionics Intern (Summer 2027)', 'Antenna Intern (Summer 2027)', 'FPGA Intern (Summer 2027)', 'Harness Manufacturing Intern (Summer 2027)'])('%s', (title) => {
+    const c = classifyRole({ title, department: null, description: 'Our recruiting team will reach out. Work with the RF team on hardware.', companyIndustry: 'industrials' });
+    expect(c.family).not.toBe('business');
+  });
+});

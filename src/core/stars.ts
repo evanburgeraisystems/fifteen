@@ -6,6 +6,7 @@
  *   - a deadline is approaching on a role they haven't applied to
  * Clicking the card acknowledges everything up to now; only a later event re-lights it.
  */
+import { isFreshOnPull } from './fresh.ts';
 import { labelCareer } from './taxonomy.ts';
 import { addDays, daysBetween, fmtMonthDay, plusYear, type CompanyWindow } from './windows.ts';
 import type { CareerId, HistoryRole, Posting } from './types.ts';
@@ -34,12 +35,13 @@ export function starEvents(
   appliedIds: Set<string>,
   todayIso: string,
   lastCycleRoles: HistoryRole[] = [],
+  trackingSince = '0000-00-00',
 ): StarEvent[] {
   const today = todayIso.slice(0, 10);
   const events: StarEvent[] = [];
   const mine = live.filter((p) => p.companySlug === slug);
 
-  const fresh = mine.filter((p) => p.firstSeen === today || daysBetween(p.firstSeen, today) <= 1);
+  const fresh = mine.filter((p) => isFreshOnPull(p, today, trackingSince) || (p.firstSeen !== trackingSince && daysBetween(p.firstSeen, today) === 1));
   for (const p of fresh) {
     events.push({ kind: 'new-role', at: p.firstSeen, text: `New: ${p.title}`, postingId: p.id });
   }

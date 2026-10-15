@@ -46,16 +46,16 @@ export function Home() {
     for (const r of inView) by[r.fit.tier].push(r);
     // Newest pull first inside each lane, then fit order (already sorted).
     for (const t of TIER_ORDER) {
-      by[t] = [...by[t].filter((r) => r.posting.firstSeen === ds.pullDate), ...by[t].filter((r) => r.posting.firstSeen !== ds.pullDate)];
+      by[t] = [...by[t].filter((r) => ds.isFresh(r.posting)), ...by[t].filter((r) => !ds.isFresh(r.posting))];
     }
     return by;
-  }, [inView, ds.pullDate]);
+  }, [inView, ds]);
 
   const newCounts = useMemo(() => {
     const c: Record<FitTier, number> = { perfect: 0, almost: 0, weak: 0, nonfit: 0 };
-    for (const r of inView) if (r.posting.firstSeen === ds.pullDate) c[r.fit.tier]++;
+    for (const r of inView) if (ds.isFresh(r.posting)) c[r.fit.tier]++;
     return c;
-  }, [inView, ds.pullDate]);
+  }, [inView, ds]);
   const newTotal = newCounts.perfect + newCounts.almost + newCounts.weak;
 
   // New badges clear once seen: record what this visit showed.

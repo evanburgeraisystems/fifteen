@@ -22,7 +22,7 @@ export function useStarViews(): StarView[] {
       .map(([slug, st]) => {
         const window = predictCompanyWindow(slug, ds.visible, ds.history, now);
         const last = companyRolesByCycle(ds.history, slug, previousCycle(now));
-        const events = starEvents(slug, ds.visible, window, applied, now, last);
+        const events = starEvents(slug, ds.visible, window, applied, now, last, ds.snapshot.trackingSince);
         return { slug, name: st.name, alerts: st.alerts, window, events, fresh: unacknowledged(events, st) };
       })
       .sort((a, b) => b.fresh.length - a.fresh.length || a.name.localeCompare(b.name));

@@ -69,7 +69,7 @@ export interface AppState {
   theme: Theme;
 }
 
-const KEY = 'fifteen.state.v1';
+let KEY = 'fifteen.state.v1:live';
 
 function randomId(n = 8): string {
   const a = new Uint8Array(n);
@@ -111,7 +111,7 @@ function load(): AppState {
   }
 }
 
-let state: AppState = typeof window === 'undefined' ? initialState() : load();
+let state: AppState = initialState();
 const listeners = new Set<() => void>();
 
 function persist(): void {
@@ -120,6 +120,16 @@ function persist(): void {
   } catch {
     /* quota or private mode: state still lives for this session */
   }
+}
+
+/**
+ * Each dataset keeps its own saved state, so stars and tracker cards from the
+ * fictional demo never appear next to live postings.
+ */
+export function bindStore(datasetId: string): void {
+  KEY = `fifteen.state.v1:${datasetId}`;
+  state = load();
+  for (const l of listeners) l();
 }
 
 export function getState(): AppState {

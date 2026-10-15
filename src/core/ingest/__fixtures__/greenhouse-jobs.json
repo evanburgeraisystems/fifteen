@@ -1,0 +1,452 @@
+{
+ "jobs": [
+  {
+   "absolute_url": "https://www.coinbase.com/careers/positions/8173991?gh_jid=8173991",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "education": "education_required",
+   "employment": "employment_required",
+   "internal_job_id": 3537638,
+   "location": {
+    "name": "Hybrid - New York, NY"
+   },
+   "metadata": [
+    {
+     "id": 166433,
+     "name": "Team",
+     "value": "Finance",
+     "value_type": "single_select"
+    },
+    {
+     "id": 11090754,
+     "name": "HM Employee ID (WD)",
+     "value": "208714",
+     "value_type": "short_text"
+    },
+    {
+     "id": 3174030,
+     "name": "Careersite Department (for job postings)",
+     "value": "Internships & Emerging Talent Positions",
+     "value_type": "single_select"
+    },
+    {
+     "id": 13234829,
+     "name": "mule_sourcers_counter_custom",
+     "value": "0.0",
+     "value_type": "number"
+    },
+    {
+     "id": 13234830,
+     "name": "mule_recruiters_counter_custom",
+     "value": "0.0",
+     "value_type": "number"
+    }
+   ],
+   "id": 8173991,
+   "updated_at": "2026-10-13T19:51:20-04:00",
+   "requisition_id": "P78074",
+   "title": "Accounting Intern",
+   "pay_input_ranges": [
+    {
+     "min_cents": 4000,
+     "max_cents": 4000,
+     "currency_type": "USD",
+     "title": "Hourly Rate:",
+     "blurb": ""
+    }
+   ],
+   "company_name": "Coinbase",
+   "first_published": "2026-09-08T18:28:47-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;p&gt;Ready to do the most impactful work of your career? At&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/?utm_campaign=mt_o_m_w_m_m__coi_0_jd-onchain&amp;amp;utm_source=coinbase&quot;&gt;Coinbase&lt;/a&gt;, we are uncompromising on our mission to increase economic freedom. The bar is high, the environment is intense, and we like it that way. This isn&#39;t a place for complacency, it’s a place to be pushed past your perceived limits. If you&#39;re ready to build the future of finance alongside people who refuse to settle for &quot;good enough,&quot; you belong here. Coinbase is a remote-first, but not remote-only company. Expect to get together quarterly for intense in-person working sessions called “surges.”&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/careers&quot;&gt;learn more about working at Coinbase&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;&lt;p class=&quot;mb-2 whitespace-pre-wrap&quot;&gt;This is a 12-week internship during summer 2027.&lt;/p&gt;\n&lt;p class=&quot;mb-2 whitespace-pre-wrap&quot;&gt;As an Accounting Intern, you&#39;ll join the Accounting team within Finance and get hands-on experience across a wide range of accounting operations. You&#39;ll collaborate with teams like Tax, FP&amp;amp;A, Treasury, and Source-to-Pay to support day-to-day processes, month/quarter-end close, and accounting transformation projects. You&#39;ll contribute real work from balance sheet reconciliations to system implementations, gaining exposure across multiple accounting functions and international stakeholders.&lt;/p&gt;\n&lt;p class=&quot;mb-2 whitespace-pre-wrap&quot;&gt;&lt;strong&gt;What you&#39;ll do:&lt;/strong&gt;&lt;/p&gt;",
+   "departments": [
+    {
+     "id": 60542,
+     "name": "Internships & Emerging Talent Positions",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 76481,
+     "name": "US - Remote Zone 1 (Job Requisitions Only)",
+     "location": null,
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://www.coinbase.com/careers/positions/8175369?gh_jid=8175369",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "education": "education_required",
+   "employment": "employment_required",
+   "internal_job_id": 3538145,
+   "location": {
+    "name": "Hybrid - New York, NY"
+   },
+   "metadata": [
+    {
+     "id": 166433,
+     "name": "Team",
+     "value": "Finance",
+     "value_type": "single_select"
+    },
+    {
+     "id": 11090754,
+     "name": "HM Employee ID (WD)",
+     "value": "200278",
+     "value_type": "short_text"
+    },
+    {
+     "id": 3174030,
+     "name": "Careersite Department (for job postings)",
+     "value": "Internships & Emerging Talent Positions",
+     "value_type": "single_select"
+    },
+    {
+     "id": 13234829,
+     "name": "mule_sourcers_counter_custom",
+     "value": "0.0",
+     "value_type": "number"
+    },
+    {
+     "id": 13234830,
+     "name": "mule_recruiters_counter_custom",
+     "value": "0.0",
+     "value_type": "number"
+    }
+   ],
+   "id": 8175369,
+   "updated_at": "2026-10-13T19:51:35-04:00",
+   "requisition_id": "P78077",
+   "title": "Credit Risk Intern",
+   "pay_input_ranges": [
+    {
+     "min_cents": 4000,
+     "max_cents": 4000,
+     "currency_type": "USD",
+     "title": "Hourly Rate:",
+     "blurb": ""
+    }
+   ],
+   "company_name": "Coinbase",
+   "first_published": "2026-09-08T20:03:44-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;p&gt;Ready to do the most impactful work of your career? At&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/?utm_campaign=mt_o_m_w_m_m__coi_0_jd-onchain&amp;amp;utm_source=coinbase&quot;&gt;Coinbase&lt;/a&gt;, we are uncompromising on our mission to increase economic freedom. The bar is high, the environment is intense, and we like it that way. This isn&#39;t a place for complacency, it’s a place to be pushed past your perceived limits. If you&#39;re ready to build the future of finance alongside people who refuse to settle for &quot;good enough,&quot; you belong here. Coinbase is a remote-first, but not remote-only company. Expect to get together quarterly for intense in-person working sessions called “surges.”&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/careers&quot;&gt;learn more about working at Coinbase&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;&lt;p&gt;This is a 12-week internship during summer 2027.&lt;/p&gt;\n&lt;p&gt;Join the Credit Risk team within the Financial &amp;amp; Operational Risk subteam of Finance. You&#39;ll support the underwriting, monitoring, and analysis of counterparty and asset-level credit risk across Coinbase&#39;s global institutional client base. Working alongside risk professionals and product teams, you&#39;ll gain hands-on experience evaluating complex exposures in digital asset lending and trading, and your work will directly inform credit decisions and risk reporting for leadership.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;What you&#39;ll do:&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Underwrite institutional counterparties, including hedge funds, asset managers, corporates, market makers, and banking and payment providers, recommending internal credit ratings and risk-based limits with written substantiation.&lt;/li&gt;\n&lt;li&gt;Monitor trading and bank partner exposures on an ongoing basis, conducting periodic portfolio reviews and flagging concentration risks or emerging trends to leadership.&lt;/li&gt;\n&lt;li&gt;Analyze asset volatility and liquidity risks on a per-asset and portfolio basis to support lending and trading product decisions.&lt;/li&gt;\n&lt;li&gt;Collaborate with product, sales, operations, and legal teams to resolve client or product challenges and deliver risk-informed solutions.&lt;/li&gt;\n&lt;li&gt;Research industry trends, regulatory developments, and crypto market dynamics to contribute to the team&#39;s thought leadership and continuous improvement.&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;&lt;strong&gt;Required Skills and Experience:&lt;/strong&gt;&lt;/p&gt;",
+   "departments": [
+    {
+     "id": 60542,
+     "name": "Internships & Emerging Talent Positions",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 76481,
+     "name": "US - Remote Zone 1 (Job Requisitions Only)",
+     "location": null,
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://www.coinbase.com/careers/positions/8168322?gh_jid=8168322",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "education": "education_required",
+   "employment": "employment_required",
+   "internal_job_id": 3534949,
+   "location": {
+    "name": "Hybrid - San Francisco, CA"
+   },
+   "metadata": [
+    {
+     "id": 166433,
+     "name": "Team",
+     "value": "Emerging Talent",
+     "value_type": "single_select"
+    },
+    {
+     "id": 11090754,
+     "name": "HM Employee ID (WD)",
+     "value": null,
+     "value_type": "short_text"
+    },
+    {
+     "id": 3174030,
+     "name": "Careersite Department (for job postings)",
+     "value": "Internships & Emerging Talent Positions",
+     "value_type": "single_select"
+    },
+    {
+     "id": 13234829,
+     "name": "mule_sourcers_counter_custom",
+     "value": "0.0",
+     "value_type": "number"
+    },
+    {
+     "id": 13234830,
+     "name": "mule_recruiters_counter_custom",
+     "value": "0.0",
+     "value_type": "number"
+    }
+   ],
+   "id": 8168322,
+   "updated_at": "2026-09-08T18:15:06-04:00",
+   "requisition_id": "GETR-PAPM00US-Q326",
+   "title": "Associate Product Manager Intern",
+   "pay_input_ranges": [
+    {
+     "min_cents": 5500,
+     "max_cents": 5500,
+     "currency_type": "USD",
+     "title": "Hourly Rate:",
+     "blurb": ""
+    }
+   ],
+   "company_name": "Coinbase",
+   "first_published": "2026-09-08T18:13:14-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;p&gt;Ready to do the most impactful work of your career? At&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/?utm_campaign=mt_o_m_w_m_m__coi_0_jd-onchain&amp;amp;utm_source=coinbase&quot;&gt;Coinbase&lt;/a&gt;, we are uncompromising on our mission to increase economic freedom. The bar is high, the environment is intense, and we like it that way. This isn&#39;t a place for complacency, it’s a place to be pushed past your perceived limits. If you&#39;re ready to build the future of finance alongside people who refuse to settle for &quot;good enough,&quot; you belong here. Coinbase is a remote-first, but not remote-only company. Expect to get together quarterly for intense in-person working sessions called “surges.”&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/careers&quot;&gt;learn more about working at Coinbase&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;&lt;p&gt;This is a 12-week internship during summer 2027.&lt;/p&gt;\n&lt;p&gt;As an Associate Product Manager (APM) Intern, you&#39;ll spend 12 weeks partnering with engineering, design, and cross-functional teams to build products that bring the world onchain. Coinbase&#39;s product managers play a pivotal role in shaping the future of cryptocurrency and creating an open financial system, and you&#39;ll experience that firsthand. You&#39;ll own a meaningful product area, ship real features used by millions of customers, and develop the strategic thinking that defines great product managers.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Product Group Teams (internship location = San Francisco):&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Consumer - Shape the fastest way to access crypto through the Coinbase retail app, advanced trade, dApps, and staking, paving the way for the future onchain.&lt;/li&gt;\n&lt;li&gt;Developer - Drive the roadmap for simple, secure APIs and SDKs that bring a million builders onchain across payments, trading, wallets, and stablecoins.&lt;/li&gt;\n&lt;li&gt;Institutional - Lead product initiatives enabling thousands of large financial institutions to securely custody digital assets, stake, and participate in the crypto economy.&lt;/li&gt;\n&lt;li&gt;Platform - Own product strategy for the scalable, compliant foundational systems (Identity, FinHub, Payments) that underpin all Coinbase products and leverage machine learning to drive intelligent automation.&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;&lt;strong&gt;Core Teams (internship location = New York City):&lt;/strong&gt;&lt;/p&gt;",
+   "departments": [
+    {
+     "id": 60542,
+     "name": "Internships & Emerging Talent Positions",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 76481,
+     "name": "US - Remote Zone 1 (Job Requisitions Only)",
+     "location": null,
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://www.coinbase.com/careers/positions/8154987?gh_jid=8154987",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "education": "education_required",
+   "employment": "employment_required",
+   "internal_job_id": 3529047,
+   "location": {
+    "name": "Remote - UK"
+   },
+   "metadata": [
+    {
+     "id": 166433,
+     "name": "Team",
+     "value": "Finance",
+     "value_type": "single_select"
+    },
+    {
+     "id": 11090754,
+     "name": "HM Employee ID (WD)",
+     "value": "209426",
+     "value_type": "short_text"
+    },
+    {
+     "id": 3174030,
+     "name": "Careersite Department (for job postings)",
+     "value": "Finance & Accounting",
+     "value_type": "single_select"
+    },
+    {
+     "id": 13234829,
+     "name": "mule_sourcers_counter_custom",
+     "value": null,
+     "value_type": "number"
+    },
+    {
+     "id": 13234830,
+     "name": "mule_recruiters_counter_custom",
+     "value": null,
+     "value_type": "number"
+    }
+   ],
+   "id": 8154987,
+   "updated_at": "2026-10-13T19:47:02-04:00",
+   "requisition_id": "P77898",
+   "title": "Associate Manager, Internal Audit",
+   "pay_input_ranges": [
+    {
+     "min_cents": 7650000,
+     "max_cents": 8500000,
+     "currency_type": "GBP",
+     "title": "Annual base salary range (excluding equity and bonus):",
+     "blurb": ""
+    }
+   ],
+   "company_name": "Coinbase",
+   "first_published": "2026-08-24T16:07:27-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;p&gt;Ready to do the most impactful work of your career? At&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/?utm_campaign=mt_o_m_w_m_m__coi_0_jd-onchain&amp;amp;utm_source=coinbase&quot;&gt;Coinbase&lt;/a&gt;, we are uncompromising on our mission to increase economic freedom. The bar is high, the environment is intense, and we like it that way. This isn&#39;t a place for complacency, it’s a place to be pushed past your perceived limits. If you&#39;re ready to build the future of finance alongside people who refuse to settle for &quot;good enough,&quot; you belong here. Coinbase is a remote-first, but not remote-only company. Expect to get together quarterly for intense in-person working sessions called “surges.”&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/careers&quot;&gt;learn more about working at Coinbase&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;&lt;p&gt;The Coinbase Internal Audit team is an independent, risk-based function that helps protect and strengthen the company by evaluating the effectiveness of governance, compliance, risk management, and control processes. Operating as the third line of defense, the team partners across the business to deliver objective assurance and practical recommendations that improve operations, support regulatory readiness, and help Coinbase scale with confidence.&lt;/p&gt;\n&lt;p&gt;Coinbase is looking for an Associate Manager to join the Internal Audit team, focused on Financial Crimes Compliance (FCC). This role is based in the United Kingdom (Remote) and will report to the Internal Audit Manager. This individual will take a lead role in executing FCC audits end-to-end, from planning through reporting and validation, while also mentoring junior team members and beginning to take on audit leadership responsibilities. This individual has solid experience working in or with FinTech or financial services, a working knowledge of the applicable regulatory environment, and demonstrated ability to independently manage audit engagements with minimal oversight.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;What you’ll do:&amp;nbsp;&lt;/strong&gt;&lt;/p&gt;",
+   "departments": [
+    {
+     "id": 967,
+     "name": "Finance & Accounting",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 76485,
+     "name": "UK - Remote Zone 1 (Job Requisitions Only)",
+     "location": null,
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://www.coinbase.com/careers/positions/8114684?gh_jid=8114684",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "education": "education_required",
+   "employment": "employment_required",
+   "internal_job_id": 3514899,
+   "location": {
+    "name": "Remote - USA"
+   },
+   "metadata": [
+    {
+     "id": 166433,
+     "name": "Team",
+     "value": "Finance",
+     "value_type": "single_select"
+    },
+    {
+     "id": 11090754,
+     "name": "HM Employee ID (WD)",
+     "value": "207334",
+     "value_type": "short_text"
+    },
+    {
+     "id": 3174030,
+     "name": "Careersite Department (for job postings)",
+     "value": "Finance & Accounting",
+     "value_type": "single_select"
+    },
+    {
+     "id": 13234829,
+     "name": "mule_sourcers_counter_custom",
+     "value": null,
+     "value_type": "number"
+    },
+    {
+     "id": 13234830,
+     "name": "mule_recruiters_counter_custom",
+     "value": null,
+     "value_type": "number"
+    }
+   ],
+   "id": 8114684,
+   "updated_at": "2026-10-13T19:45:28-04:00",
+   "requisition_id": "P77764",
+   "title": "Internal Audit Senior Associate, Operations & Compliance",
+   "pay_input_ranges": [
+    {
+     "min_cents": 10863000,
+     "max_cents": 12780000,
+     "currency_type": "USD",
+     "title": "Annual base salary range (excluding equity and bonus):",
+     "blurb": ""
+    }
+   ],
+   "company_name": "Coinbase",
+   "first_published": "2026-08-07T18:15:32-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;p&gt;Ready to do the most impactful work of your career? At&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/?utm_campaign=mt_o_m_w_m_m__coi_0_jd-onchain&amp;amp;utm_source=coinbase&quot;&gt;Coinbase&lt;/a&gt;, we are uncompromising on our mission to increase economic freedom. The bar is high, the environment is intense, and we like it that way. This isn&#39;t a place for complacency, it’s a place to be pushed past your perceived limits. If you&#39;re ready to build the future of finance alongside people who refuse to settle for &quot;good enough,&quot; you belong here. Coinbase is a remote-first, but not remote-only company. Expect to get together quarterly for intense in-person working sessions called “surges.”&amp;nbsp;&lt;a href=&quot;https://www.coinbase.com/careers&quot;&gt;learn more about working at Coinbase&lt;/a&gt;.&lt;/p&gt;",
+   "departments": [
+    {
+     "id": 967,
+     "name": "Finance & Accounting",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 76481,
+     "name": "US - Remote Zone 1 (Job Requisitions Only)",
+     "location": null,
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  }
+ ],
+ "meta": {
+  "total": 5
+ }
+}

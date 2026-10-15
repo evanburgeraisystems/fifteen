@@ -21,7 +21,8 @@ const SUMMER_PROGRAM = new RegExp(
 );
 const EARLY_PROGRAM = [
   /\binsight\s+(?:program|programme|day|week|event)s?\b/,
-  /\bearly[- ](?:id|identification|insight|careers?)\b/,
+  // "Early career" alone means new-grad or recruiter roles; only early-ID/insight programs count.
+  /\bearly[- ](?:id|identification|insight)\b/,
   /\bspring\s+week\b/,
   /\b(?:sophomore|freshman|first[- ]year)\s+(?:program|programme|analyst|scholars?|fellowship|internship|insight|leadership|summit|associate)/,
   /\b(?:sophomore|freshman)\s+and\s+(?:sophomore|freshman|junior)\b.*\bprograms?\b/,

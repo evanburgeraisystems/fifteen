@@ -129,6 +129,12 @@ const RULES: Rule[] = [
     re: /\b(business (?:analyst|intelligence|analytics)|data analy(?:st|sts|tics)|analytics|\bbi (?:analyst|developer)|insights? analyst|pricing analyst|reporting analyst|product analyst|decision support)\b/,
   },
   {
+    // Hardware engineering has no business career; keep it out of business lanes.
+    career: 'other',
+    strength: 'strong',
+    re: /\b(antenna|avionics|fpga|rf|radio frequency|power electronics|electrical|mechanical|aerospace|propulsion|firmware|embedded|hardware|harness|integration,? and test|asic|pcb|thermal|structures)\b/,
+  },
+  {
     career: 'software-engineering',
     strength: 'generic',
     re: /\b(engineer|engineering|developer|programmer|technology|technical|\bit\b)\b/,
@@ -193,7 +199,7 @@ const DESCRIPTION_KEYWORDS: { career: CareerId; terms: string[] }[] = [
   { career: 'supply-chain', terms: ['supply chain', 'logistics', 'procurement', 'inventory', 'demand planning', 'suppliers', 'vendors', 'warehouse'] },
   { career: 'business-analytics', terms: ['dashboards', 'tableau', 'power bi', 'kpis', 'data analysis', 'sql queries', 'business intelligence'] },
   { career: 'product-management', terms: ['product roadmap', 'user stories', 'product requirements', 'prds', 'product lifecycle', 'feature prioritization'] },
-  { career: 'people-hr', terms: ['recruiting', 'talent acquisition', 'onboarding', 'employee engagement', 'hris', 'candidate experience'] },
+  { career: 'people-hr', terms: ['human resources', 'talent acquisition', 'onboarding', 'employee engagement', 'hris', 'candidate experience'] },
   { career: 'real-estate', terms: ['real estate', 'leasing', 'tenants', 'underwriting', 'reit', 'property management', 'rent roll'] },
   { career: 'software-engineering', terms: ['software development', 'codebase', 'code reviews', 'algorithms', 'apis', 'data structures', 'unit tests'] },
   { career: 'data-science', terms: ['machine learning models', 'statistical modeling', 'predictive models', 'data scientist', 'model training'] },
