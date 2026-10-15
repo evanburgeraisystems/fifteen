@@ -56,7 +56,7 @@ export function Home() {
     for (const r of inView) if (ds.isFresh(r.posting)) c[r.fit.tier]++;
     return c;
   }, [inView, ds]);
-  const newTotal = newCounts.perfect + newCounts.almost + newCounts.weak;
+  const newTotal = newCounts.perfect + newCounts.almost + newCounts.weak + newCounts.nonfit;
 
   // New badges clear once seen: record what this visit showed.
   useEffect(() => {
@@ -113,6 +113,7 @@ export function Home() {
               <TodayStat n={newCounts.perfect} label="Perfect" gradient animate={populating} />
               <TodayStat n={newCounts.almost} label="Almost" animate={populating} />
               <TodayStat n={newCounts.weak} label="Weak" animate={populating} />
+              {newCounts.nonfit > 0 ? <TodayStat n={newCounts.nonfit} label="Non-fit" animate={populating} /> : null}
             </>
           )}
         </div>
@@ -140,7 +141,7 @@ export function Home() {
 function TodayStat({ n, label, gradient, animate }: { n: number; label: string; gradient?: boolean; animate: boolean }) {
   const shown = useCountUp(n, animate);
   return (
-    <span className="today-stat" data-testid={`new-${label.toLowerCase()}`}>
+    <span className="today-stat" data-testid={`new-${label.toLowerCase().replace('-', '')}`}>
       <span className={`num ${gradient && n > 0 ? 'gradient-text' : ''}`}>{shown}</span>
       {label}
     </span>
@@ -175,7 +176,7 @@ function Lane({ tier, items }: { tier: FitTier; items: Ranked[] }) {
       )}
       {rest > 0 ? (
         <button type="button" className="link-btn lane-more" onClick={() => setLimit((l) => l + 20)}>
-          Show {Math.min(rest, 20)} more of {rest}
+          {rest <= 20 ? `Show ${rest} more` : `Show 20 more of ${rest.toLocaleString('en-US')}`}
         </button>
       ) : null}
       {tier === 'perfect' && items.length === 0 ? (

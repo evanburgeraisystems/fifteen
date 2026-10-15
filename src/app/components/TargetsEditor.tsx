@@ -61,7 +61,7 @@ export function TargetsEditor({ value, onChange }: { value: Targets; onChange: (
             id="pay-floor"
             className="input"
             inputMode="numeric"
-            placeholder="20"
+            placeholder="e.g. 20"
             value={value.payFloorHourly ?? ''}
             onChange={(e) => {
               const n = Number(e.target.value.replace(/[^0-9.]/g, ''));

@@ -990,12 +990,18 @@ code {
 }
 
 /* ---------- season close ---------- */
+.season-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s-8);
+  align-items: center;
+  padding: var(--s-8) 0;
+}
+
 .season-hero {
   display: grid;
   gap: var(--s-5);
   justify-items: start;
-  max-width: 820px;
-  padding: var(--s-8) 0;
 }
 
 .eyebrow {
@@ -1079,7 +1085,6 @@ code {
 
 .recap-card {
   width: 100%;
-  max-width: 720px;
   border-radius: var(--r-lg);
   overflow: hidden;
   box-shadow: var(--shadow-2);
@@ -1137,6 +1142,11 @@ code {
 
   .season-title {
     font-size: var(--t-4xl);
+  }
+
+  .season-split {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--s-6) 0;
   }
 
   .season-stats {

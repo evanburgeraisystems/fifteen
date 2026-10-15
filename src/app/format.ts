@@ -16,7 +16,7 @@ export function verifiedLabel(verifiedAt: string | null, nowIso: string): string
   return verifiedAt.slice(0, 10) === nowIso.slice(0, 10) ? 'Verified today' : `Verified ${fmtMonthDay(verifiedAt)}`;
 }
 
-export const plural = (n: number, word: string, pluralWord = `${word}s`): string => `${n} ${n === 1 ? word : pluralWord}`;
+export const plural = (n: number, word: string, pluralWord = `${word}s`): string => `${n.toLocaleString('en-US')} ${n === 1 ? word : pluralWord}`;
 
 export function fmtDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });

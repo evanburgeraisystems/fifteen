@@ -172,7 +172,7 @@ export function Jobs() {
             Show {Math.min(PAGE, results.length - limit)} more
           </button>
           <span className="muted">
-            {limit} of {results.length}
+            {limit.toLocaleString('en-US')} of {results.length.toLocaleString('en-US')}
           </span>
         </div>
       ) : null}

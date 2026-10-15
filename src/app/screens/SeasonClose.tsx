@@ -44,18 +44,20 @@ export function SeasonClose() {
     const offer = offers[0];
     return (
       <div className="page season-page">
-        <div className="season-hero celebrate">
-          <p className="eyebrow">Summer {summer}</p>
-          <h1 className="season-title">Congrats!</h1>
-          <p className="season-lead">
-            You landed an offer from <span className="gradient-text strong">{offer?.company}</span>
-            {offer ? <> for {offer.title}.</> : '.'}
-          </p>
+        <div className="season-split">
+          <div className="season-hero celebrate">
+            <p className="eyebrow">Summer {summer}</p>
+            <h1 className="season-title">Congrats!</h1>
+            <p className="season-lead">
+              You landed an offer from <span className="gradient-text strong">{offer?.company}</span>
+              {offer ? <> for {offer.title}.</> : '.'}
+            </p>
+            <p className="field-hint">Your tracker and stars stay put for next year.</p>
+            <Link to="/" className="btn btn-secondary">
+              Back to Home
+            </Link>
+          </div>
           <RecapCard company={offer?.company ?? ''} title={offer?.title ?? ''} summer={summer} stats={stats} />
-          <p className="field-hint">Your tracker and stars stay put for next year.</p>
-          <Link to="/" className="btn btn-secondary">
-            Back to Home
-          </Link>
         </div>
       </div>
     );
@@ -63,6 +65,7 @@ export function SeasonClose() {
 
   return (
     <div className="page season-page">
+      <div className="season-split">
       <div className="season-hero">
         <p className="eyebrow">Summer {summer} · just for you</p>
         <h1 className="season-title">Keep going.</h1>
@@ -78,6 +81,16 @@ export function SeasonClose() {
         ) : (
           <p className="muted">Nothing tracked this season yet. Applications you confirm will show up here.</p>
         )}
+        <p className="field-hint">Stars and tracker carry into next season. Nothing here is shared.</p>
+        <div className="set-actions">
+          <Link to="/" className="btn btn-primary">
+            Back to Home
+          </Link>
+          <Link to="/stars" className="btn btn-secondary">
+            Star more companies
+          </Link>
+        </div>
+      </div>
         <section className="season-next" aria-labelledby="next-h">
           <h2 id="next-h" className="section-title">
             When your stars open next
@@ -97,15 +110,6 @@ export function SeasonClose() {
             <p className="muted">Star a few companies and we’ll show their next windows here.</p>
           )}
         </section>
-        <p className="field-hint">Stars and tracker carry into next season. Nothing here is shared.</p>
-        <div className="set-actions">
-          <Link to="/" className="btn btn-primary">
-            Back to Home
-          </Link>
-          <Link to="/stars" className="btn btn-secondary">
-            Star more companies
-          </Link>
-        </div>
       </div>
     </div>
   );
@@ -131,9 +135,9 @@ function recapSvg(company: string, title: string, summer: number, stats: { appli
 <text x="80" y="230" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="84" fill="url(#g)">${esc(company)}</text>
 <text x="80" y="295" font-family="Inter, Arial, sans-serif" font-size="34" fill="#0E0F1F">${esc(t)}</text>
 <text x="80" y="450" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="64" fill="#0E0F1F">${stats.applied}</text>
-<text x="80" y="490" font-family="Inter, Arial, sans-serif" font-size="24" fill="#565360">applications</text>
-<text x="400" y="450" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="64" fill="#0E0F1F">${stats.interviews}</text>
-<text x="400" y="490" font-family="Inter, Arial, sans-serif" font-size="24" fill="#565360">interviews</text>
+<text x="80" y="490" font-family="Inter, Arial, sans-serif" font-size="24" fill="#565360">application${stats.applied === 1 ? '' : 's'}</text>
+${stats.interviews > 0 ? `<text x="400" y="450" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="64" fill="#0E0F1F">${stats.interviews}</text>
+<text x="400" y="490" font-family="Inter, Arial, sans-serif" font-size="24" fill="#565360">interview${stats.interviews === 1 ? '' : 's'}</text>` : ''}
 <text x="80" y="570" font-family="Inter, Arial, sans-serif" font-size="22" fill="#66646F">Tracked with Fifteen · free for students</text>
 </svg>`;
 }
@@ -163,7 +167,7 @@ function RecapCard({ company, title, summer, stats }: { company: string; title: 
     }
   };
   const copy = () => {
-    const text = `I’m interning at ${company} this summer (${title}). ${plural(stats.applied, 'application')}, ${plural(stats.interviews, 'interview')}.`;
+    const text = `I’m interning at ${company} this summer (${title}). ${plural(stats.applied, 'application')}${stats.interviews ? `, ${plural(stats.interviews, 'interview')}` : ''}.`;
     void navigator.clipboard?.writeText(text).then(
       () => setStatus('Copied.'),
       () => setStatus('Couldn’t copy in this browser.'),
