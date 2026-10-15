@@ -33,6 +33,8 @@ Written for a quick skim on a phone. Newest entry on top.
 | 12 | Live data: non-US roles (Tokyo, m/w/d) | App shows US-or-remote only; data keeps all |
 | 13 | Live data: "early career" new-grad roles counted as internships; hardware interns in People & HR | Classifier fixes + regression tests |
 | 14 | First live pull marked every role "New today" | First tracked day uses the employer's posted date |
+| 15 | Last Intern Cycle was a 70-row wall at big companies | Grouped by role type, one bar each, roles behind a disclosure |
+| 16 | E2E fixture had an off-by-default warning-ignore switch | Removed: any warning fails the suite |
 
 **Live data now:** 247 seed boards (Greenhouse 179, Lever 29, Ashby 39), 864 internships, every link verified, 230 US business internships from 59 companies.
 

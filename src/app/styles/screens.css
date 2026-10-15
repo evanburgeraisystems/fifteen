@@ -878,6 +878,56 @@ code {
   padding-bottom: var(--s-1);
 }
 
+.tl-group > summary {
+  list-style: none;
+  cursor: pointer;
+  border-radius: var(--r-xs);
+}
+
+.tl-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.tl-group > summary:hover .tl-label {
+  color: var(--primary-text);
+}
+
+.tl-group > summary:active .tl-label {
+  color: var(--primary-active);
+}
+
+.tl-group > summary .tl-label::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 8px 2px 1px;
+  border-right: 1.5px solid var(--text-muted);
+  border-bottom: 1.5px solid var(--text-muted);
+  transform: rotate(-45deg);
+  transition: transform var(--d-fast) var(--ease-out);
+}
+
+.tl-group[open] > summary .tl-label::before {
+  transform: rotate(45deg);
+}
+
+.tl-roles {
+  list-style: none;
+  margin: 0 0 var(--s-2);
+  padding: 0;
+}
+
+.tl-sub {
+  padding-left: 1em;
+  color: var(--text);
+  font-size: var(--t-xs);
+}
+
+.tl-bar-sub {
+  background: var(--lane-weak);
+}
+
 .tl-label {
   font-size: var(--t-sm);
   color: var(--ink);

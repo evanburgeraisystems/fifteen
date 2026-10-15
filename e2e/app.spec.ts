@@ -107,7 +107,12 @@ test.describe('Stars', () => {
     const sub = page.getByRole('navigation', { name: 'Northwind Capital sections' });
     await sub.getByRole('link', { name: 'Last Intern Cycle' }).click();
     await expect(page).toHaveURL(/\/company\/northwind-capital\/cycle$/);
-    await expect(page.getByRole('table', { name: 'Last intern cycle timeline' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /cycle: when each kind of role opened and closed/ })).toBeVisible();
+    const group = page.locator('details.tl-group').first();
+    await expect(group).toBeVisible();
+    await expect(group.locator('.tl-roles')).toBeHidden();
+    await group.locator('summary').click();
+    await expect(group.locator('.tl-roles li').first()).toBeVisible();
     await expect(page.getByRole('link', { name: 'Last Intern Cycle' })).toHaveAttribute('aria-current', 'page');
     await shoot('cycle');
 

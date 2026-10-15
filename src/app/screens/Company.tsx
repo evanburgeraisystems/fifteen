@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Link, NavLink, useParams } from 'react-router';
 import { companyPay, fmtHourly, FULL_TIME_PAY_NOTE } from '../../core/pay.ts';
 import { labelCareer, labelIndustry } from '../../core/taxonomy.ts';
+import type { CareerId, HistoryRole } from '../../core/types.ts';
 import { companyRolesByCycle, fmtMonthDay, fmtMonthYear, predictCompanyWindow, previousCycle } from '../../core/windows.ts';
 import { Icon } from '../components/Icon.tsx';
 import { JobCard, StarButton } from '../components/JobCard.tsx';
@@ -129,6 +130,20 @@ const MONTHS = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', '
 
 function CycleView({ roles, cycleLabel }: { roles: ReturnType<typeof companyRolesByCycle>; cycleLabel: string }) {
   const { ds } = useApp();
+  const groups = useMemo(() => {
+    const by = new Map<CareerId, HistoryRole[]>();
+    for (const r of roles) by.set(r.career, [...(by.get(r.career) ?? []), r]);
+    return [...by.entries()]
+      .map(([career, rs]) => {
+        const sorted = [...rs].sort((a, b) => (a.opened < b.opened ? -1 : 1));
+        const opened = sorted[0]?.opened ?? '';
+        const closes = rs.map((r) => r.closed);
+        const closed = closes.some((c) => c == null) ? null : (closes.sort().at(-1) ?? null);
+        return { career, roles: sorted, opened, closed };
+      })
+      .sort((a, b) => (a.opened < b.opened ? -1 : 1));
+  }, [roles]);
+
   if (roles.length === 0) {
     return (
       <div className="state">
@@ -140,48 +155,64 @@ function CycleView({ roles, cycleLabel }: { roles: ReturnType<typeof companyRole
       </div>
     );
   }
-  const sorted = [...roles].sort((a, b) => (a.opened < b.opened ? -1 : 1));
-  const first = sorted[0];
+  const first = groups[0];
   const year = first ? Number(first.opened.slice(0, 4)) - (Number(first.opened.slice(5, 7)) < 7 ? 1 : 0) : 2025;
   const start = Date.UTC(year, 6, 1);
   const span = Date.UTC(year + 1, 6, 1) - start;
   const pos = (iso: string) => Math.max(0, Math.min(100, ((Date.parse(iso) - start) / span) * 100));
+  const bar = (opened: string, closed: string | null) => {
+    const left = pos(opened);
+    const right = closed ? pos(closed) : 100;
+    return { left: `${left}%`, width: `${Math.max(1.5, right - left)}%` };
+  };
 
   return (
     <section aria-labelledby="cycle-h">
       <h2 id="cycle-h" className="section-title">
-        {cycleLabel} cycle: when each role opened and closed
+        {cycleLabel} cycle: when each kind of role opened and closed
       </h2>
       <p className="field-hint">
-        From our daily pulls{ds.isDemo ? ' (demo history)' : ''}. Bars run from the first day a role was live to the last.
+        From our daily pulls{ds.isDemo ? ' (demo history)' : ''}. Each bar runs from the first day a role of that kind was live to the last. Open a row to
+        see every role.
       </p>
-      <div className="timeline" role="table" aria-label="Last intern cycle timeline">
-        <div className="tl-months" role="row" aria-hidden="true">
-          <span role="cell" />
+      <div className="timeline">
+        <div className="tl-months" aria-hidden="true">
+          <span />
           <div className="tl-scale">
             {MONTHS.map((m) => (
               <span key={m}>{m}</span>
             ))}
           </div>
         </div>
-        {sorted.map((r) => {
-          const left = pos(r.opened);
-          const right = r.closed ? pos(r.closed) : 100;
-          return (
-            <div key={r.dedupeKey} className="tl-row" role="row">
-              <span className="tl-label" role="rowheader">
-                {r.title}
-                <span className="muted"> · {labelCareer(r.career)}</span>
+        {groups.map((g) => (
+          <details key={g.career} className="tl-group">
+            <summary className="tl-row">
+              <span className="tl-label">
+                {labelCareer(g.career)}
+                <span className="muted"> · {plural(g.roles.length, 'role')}</span>
               </span>
-              <div className="tl-track" role="cell" aria-label={`Opened ${fmtMonthDay(r.opened)}${r.closed ? `, closed ${fmtMonthDay(r.closed)}` : ', still open'}`}>
-                <span className="tl-bar" style={{ left: `${left}%`, width: `${Math.max(1.5, right - left)}%` }} />
+              <span className="tl-track" aria-label={`Opened ${fmtMonthDay(g.opened)}${g.closed ? `, closed ${fmtMonthDay(g.closed)}` : ', still open'}`}>
+                <span className="tl-bar" style={bar(g.opened, g.closed)} />
                 <span className="tl-dates">
-                  {fmtMonthDay(r.opened)} – {r.closed ? fmtMonthDay(r.closed) : 'open'}
+                  {fmtMonthDay(g.opened)} – {g.closed ? fmtMonthDay(g.closed) : 'open'}
                 </span>
-              </div>
-            </div>
-          );
-        })}
+              </span>
+            </summary>
+            <ul className="tl-roles">
+              {g.roles.map((r) => (
+                <li key={r.dedupeKey} className="tl-row">
+                  <span className="tl-label tl-sub">{r.title}</span>
+                  <span className="tl-track" aria-label={`Opened ${fmtMonthDay(r.opened)}${r.closed ? `, closed ${fmtMonthDay(r.closed)}` : ', still open'}`}>
+                    <span className="tl-bar tl-bar-sub" style={bar(r.opened, r.closed)} />
+                    <span className="tl-dates">
+                      {fmtMonthDay(r.opened)} – {r.closed ? fmtMonthDay(r.closed) : 'open'}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
       </div>
     </section>
   );
