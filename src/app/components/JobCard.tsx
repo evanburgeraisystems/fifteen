@@ -77,7 +77,9 @@ export function JobCard({ item, showFit = false }: { item: Ranked; showFit?: boo
   return (
     <article className="job" aria-label={`${p.title} at ${p.company}`} data-posting-id={p.id} data-tier={fit.tier}>
       <div className="job-top">
-        <span className="job-company">{p.company}</span>
+        <span className="job-company" title={p.company}>
+          {p.company}
+        </span>
         <StatusPill status={status} isNew={fresh} />
         <button
           type="button"

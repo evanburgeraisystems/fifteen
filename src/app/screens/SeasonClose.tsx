@@ -124,27 +124,40 @@ function Stat({ n, label }: { n: number; label: string }) {
   );
 }
 
-function recapSvg(company: string, title: string, summer: number, stats: { applied: number; assessments: number; interviews: number }): string {
+const RECAP_PALETTE = {
+  light: { bg0: '#F1EBFC', bg1: '#FFFFFF', g0: '#5141D6', g1: '#A03C8A', ink: '#0E0F1F', text: '#565360', muted: '#66646F' },
+  dark: { bg0: '#2A2650', bg1: '#161729', g0: '#9D92F5', g1: '#E08BBF', ink: '#F4F3FA', text: '#C9C7D6', muted: '#A3A1B3' },
+};
+
+function recapSvg(
+  company: string,
+  title: string,
+  summer: number,
+  stats: { applied: number; assessments: number; interviews: number },
+  theme: 'light' | 'dark',
+): string {
+  const c = RECAP_PALETTE[theme];
   const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] ?? c);
   const t = title.length > 52 ? `${title.slice(0, 50)}…` : title;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5141D6"/><stop offset="1" stop-color="#A03C8A"/></linearGradient>
-<radialGradient id="h" cx="0.85" cy="0" r="0.9"><stop offset="0" stop-color="#F1EBFC"/><stop offset="1" stop-color="#FFFFFF"/></radialGradient></defs>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${c.g0}"/><stop offset="1" stop-color="${c.g1}"/></linearGradient>
+<radialGradient id="h" cx="0.85" cy="0" r="0.9"><stop offset="0" stop-color="${c.bg0}"/><stop offset="1" stop-color="${c.bg1}"/></radialGradient></defs>
 <rect width="1200" height="630" fill="url(#h)"/>
-<text x="80" y="120" font-family="Inter, Arial, sans-serif" font-size="28" fill="#66646F">Summer ${summer} internship</text>
+<text x="80" y="120" font-family="Inter, Arial, sans-serif" font-size="28" fill="${c.muted}">Summer ${summer} internship</text>
 <text x="80" y="230" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="84" fill="url(#g)">${esc(company)}</text>
-<text x="80" y="295" font-family="Inter, Arial, sans-serif" font-size="34" fill="#0E0F1F">${esc(t)}</text>
-<text x="80" y="450" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="64" fill="#0E0F1F">${stats.applied}</text>
-<text x="80" y="490" font-family="Inter, Arial, sans-serif" font-size="24" fill="#565360">application${stats.applied === 1 ? '' : 's'}</text>
-${stats.interviews > 0 ? `<text x="400" y="450" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="64" fill="#0E0F1F">${stats.interviews}</text>
-<text x="400" y="490" font-family="Inter, Arial, sans-serif" font-size="24" fill="#565360">interview${stats.interviews === 1 ? '' : 's'}</text>` : ''}
-<text x="80" y="570" font-family="Inter, Arial, sans-serif" font-size="22" fill="#66646F">Tracked with Fifteen · free for students</text>
+<text x="80" y="295" font-family="Inter, Arial, sans-serif" font-size="34" fill="${c.ink}">${esc(t)}</text>
+<text x="80" y="450" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="64" fill="${c.ink}">${stats.applied}</text>
+<text x="80" y="490" font-family="Inter, Arial, sans-serif" font-size="24" fill="${c.text}">application${stats.applied === 1 ? '' : 's'}</text>
+${stats.interviews > 0 ? `<text x="400" y="450" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="64" fill="${c.ink}">${stats.interviews}</text>
+<text x="400" y="490" font-family="Inter, Arial, sans-serif" font-size="24" fill="${c.text}">interview${stats.interviews === 1 ? '' : 's'}</text>` : ''}
+<text x="80" y="570" font-family="Inter, Arial, sans-serif" font-size="22" fill="${c.muted}">Tracked with Fifteen · free for students</text>
 </svg>`;
 }
 
 function RecapCard({ company, title, summer, stats }: { company: string; title: string; summer: number; stats: { applied: number; assessments: number; interviews: number } }) {
   const [status, setStatus] = useState<string | null>(null);
-  const svg = recapSvg(company, title, summer, stats);
+  const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+  const svg = recapSvg(company, title, summer, stats, theme);
   const download = async () => {
     const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
     try {
