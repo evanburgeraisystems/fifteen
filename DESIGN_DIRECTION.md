@@ -199,3 +199,22 @@ breathe 3200ms (star halo). Ease-out `cubic-bezier(.2,.8,.2,1)`.
 ### Interaction states (every interactive element, both themes)
 hover: one surface step up (or primary-hover) · active: one more step + no transform ·
 focus-visible: 2px `--focus` outline with 2px offset · disabled: 45% opacity, `not-allowed`, no hover.
+
+## 8. Clean pass (human feedback, 2026-10-15: the Lavender Paper mock was "way too messy")
+
+The mock stacked boxes inside boxes and put four markers on every card. The shipped UI follows these
+rules instead; each one is enforced in `src/app/styles/base.css` and the components.
+
+| Rule | Why |
+|---|---|
+| **No box inside a box.** Lanes are a header with a 3px colored rail, then rows divided by hairlines (Linear's list grammar). No tinted column containers. | Nested borders were the main source of noise. |
+| **One quiet meta line per role.** Company, title, then `city · age · pay ✓ Verified today`. | Four badges per card competed with the title. |
+| **At most one colored marker per row.** "New" is an indigo dot + word; Opened is muted text; Applied is green with a check. | Color should mean one thing at a glance. |
+| **Fit label only where no lane says it** (Every Job Listing, company pages). | "Perfect fit" inside the Perfect lane was redundant. |
+| **"Why" is a small info icon** in the top row; the explanation opens inline. | A text link on the meta line wrapped and dangled. |
+| **Gold surfaces only for a starred company with news.** Resting stars are a plain row with a gold star glyph. | Three gold boxes made the column shout even on quiet days. |
+| **Header in two tiers:** filters + season strip as one plain row; numbers below; legend in small type. | The mock's single band held five competing elements. |
+| **No key-cap hint chips in the nav.** Shortcuts (1–4, /) still work and are documented here. | Decoration for a feature most students won't use. |
+| **Every layout uses the full width.** Settings flows into two columns on wide screens. | The human hates dead right-side space. |
+
+The mocks in `docs/mocks/` show the pre-clean-pass direction and use illustrative numbers.
