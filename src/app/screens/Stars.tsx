@@ -132,7 +132,7 @@ function StarCard({ view }: { view: StarView }) {
               <li key={`${e.kind}-${e.text}`}>{e.text}</li>
             ))}
           </ul>
-          {view.fresh.length > 3 ? <p className="field-hint">+{view.fresh.length - 3} more on the company page</p> : null}
+          {view.fresh.length > 3 ? <p className="field-hint">+{view.fresh.length - 3} more</p> : null}
           <button
             type="button"
             className="btn btn-secondary btn-sm"

@@ -1,16 +1,15 @@
 import { useRef, useState } from 'react';
 import { getProvider } from '../../core/provider/index.ts';
-import { ResumeReadError } from '../../core/resume/extract.ts';
+import { extractResumeText, ResumeReadError } from '../../core/resume/extract.ts';
+import { parseProfile } from '../../core/resume/profile.ts';
 import type { Profile } from '../../core/types.ts';
 import { Icon } from './Icon.tsx';
 
 const provider = getProvider(import.meta.env as Record<string, string | undefined>);
 
 async function readProfile(file: File, nowIso: string): Promise<Profile> {
-  // Lazy-load pdf.js/mammoth only when a file is actually dropped.
-  const { extractResumeText } = await import('../../core/resume/extract.ts');
+  // extract.ts lazy-loads pdf.js/mammoth itself, only when a file is dropped.
   const text = await extractResumeText(file);
-  const { parseProfile } = await import('../../core/resume/profile.ts');
   const fromModel = await provider.extractProfile(text, nowIso);
   return { ...parseProfile(text, nowIso), ...(fromModel ?? {}) };
 }
