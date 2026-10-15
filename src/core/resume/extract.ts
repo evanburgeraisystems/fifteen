@@ -2,7 +2,7 @@
  * Browser-side resume text extraction. PDF via pdf.js, DOCX via mammoth.
  * Nothing leaves the browser: the file is read locally and only the text is used.
  */
-import type { PDFDocumentProxy } from 'pdfjs-dist';
+import type { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist';
 import { joinPdfPageItems, joinPdfPages, normalizeResumeText } from './pdf-text.ts';
 import type { PdfItemLike } from './pdf-text.ts';
 
@@ -60,6 +60,21 @@ function loadPdfjs(): Promise<Pdfjs> {
   return pdfjsModule;
 }
 
+/**
+ * page.getTextContent() loops `for await (… of readableStream)`, which iPhone Safari before 26 can't do
+ * ("undefined is not a function (near '...e of t...')"), and pdf.js's legacy build doesn't polyfill it.
+ * Reading the same stream with getReader() works everywhere.
+ */
+async function pageTextItems(page: PDFPageProxy): Promise<PdfItemLike[]> {
+  const reader = page.streamTextContent().getReader();
+  const items: PdfItemLike[] = [];
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) return items;
+    items.push(...(value.items as PdfItemLike[]));
+  }
+}
+
 async function pdfToText(data: Uint8Array): Promise<string> {
   const pdfjs = await loadPdfjs();
   // Text extraction only; the standard fonts are served by the pdfjs-standard-fonts Vite plugin.
@@ -77,8 +92,7 @@ async function pdfToText(data: Uint8Array): Promise<string> {
     const pages: string[] = [];
     for (let n = 1; n <= doc.numPages; n++) {
       const page = await doc.getPage(n);
-      const content = await page.getTextContent();
-      pages.push(joinPdfPageItems(content.items as PdfItemLike[]));
+      pages.push(joinPdfPageItems(await pageTextItems(page)));
     }
     return joinPdfPages(pages);
   } finally {
