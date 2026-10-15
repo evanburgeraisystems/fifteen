@@ -61,7 +61,7 @@ export function App() {
   if (error) return <LoadError message={error} onRetry={() => setAttempt((a) => a + 1)} />;
   if (!ds) return <Loading />;
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AppProvider ds={ds}>
         <Routes>
           <Route path="/welcome" element={<Onboarding />} />

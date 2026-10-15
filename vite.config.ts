@@ -35,6 +35,8 @@ function pdfjsStandardFonts(): Plugin {
 }
 
 export default defineConfig({
+  // GitHub Pages serves the site under /<repo>/; the Pages workflow sets PAGES_BASE=/fifteen/.
+  base: process.env.PAGES_BASE ?? '/',
   plugins: [react(), pdfjsStandardFonts()],
   server: { port: 5173, strictPort: true },
   test: {

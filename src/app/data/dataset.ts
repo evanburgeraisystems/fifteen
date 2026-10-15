@@ -36,6 +36,15 @@ export const ENABLED_FAMILIES = new Set(['business']);
 
 const KEY = 'fifteen.dataset';
 
+/** Site root: '/' locally, '/fifteen/' on GitHub Pages (Vite `base`). */
+const BASE = import.meta.env.BASE_URL;
+
+/** Path inside the app, without the site base. */
+function appPath(): string {
+  const p = window.location.pathname;
+  return p.startsWith(BASE) ? `/${p.slice(BASE.length)}` : p;
+}
+
 export function requestedDataset(): DatasetId | null {
   const q = new URLSearchParams(window.location.search).get('dataset');
   if (q === 'live' || q === 'demo' || q === 'demo-zero') {
@@ -47,7 +56,7 @@ export function requestedDataset(): DatasetId | null {
     return q;
   }
   // Demo links open in a new tab with no session: their ids say which dataset they belong to.
-  if (window.location.pathname.startsWith('/demo-posting/')) return 'demo';
+  if (appPath().startsWith('/demo-posting/')) return 'demo';
   try {
     const s = sessionStorage.getItem(KEY);
     if (s === 'live' || s === 'demo' || s === 'demo-zero') return s;
@@ -75,9 +84,9 @@ async function getJson<T>(url: string): Promise<T | null> {
 }
 
 const paths: Record<DatasetId, { latest: string; history: string }> = {
-  live: { latest: '/data/snapshots/latest.json', history: '/data/history.json' },
-  demo: { latest: '/data/demo/latest.json', history: '/data/demo/history.json' },
-  'demo-zero': { latest: '/data/demo-zero/latest.json', history: '/data/demo-zero/history.json' },
+  live: { latest: `${BASE}data/snapshots/latest.json`, history: `${BASE}data/history.json` },
+  demo: { latest: `${BASE}data/demo/latest.json`, history: `${BASE}data/demo/history.json` },
+  'demo-zero': { latest: `${BASE}data/demo-zero/latest.json`, history: `${BASE}data/demo-zero/history.json` },
 };
 
 export function isVisible(p: Posting, pullDate: string): boolean {
@@ -93,6 +102,12 @@ export function isVisible(p: Posting, pullDate: string): boolean {
 
 export function buildDataset(id: DatasetId, snapshot: Snapshot, history: HistoryFile | null): Dataset {
   const pullDate = snapshot.date;
+  // Demo apply links are site-relative ("/demo-posting/..."): put them under the site base.
+  if (BASE !== '/') {
+    for (const p of snapshot.postings) {
+      if (p.applyUrl?.startsWith('/')) p.applyUrl = `${BASE}${p.applyUrl.slice(1)}`;
+    }
+  }
   const visible = snapshot.postings.filter((p) => isVisible(p, pullDate));
   const isDemo = snapshot.dataset === 'demo';
   const nowIso = isDemo
