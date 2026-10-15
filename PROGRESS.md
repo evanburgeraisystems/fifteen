@@ -12,6 +12,49 @@ Written for a quick skim on a phone. Newest entry on top.
 
 ---
 
+## FINAL SUMMARY — 2026-10-15 07:36
+
+**Status: done.** Three consecutive complete gate runs passed on commit 270851f with no changes between them (log: docs/GATE_RUNS.md). Each run: typecheck, lint (0 warnings), 636 unit tests, production build, 168 Playwright tests (desktop + mobile × light + dark).
+
+**What's built**
+- Four tabs (Home, Every Job Listing, Tracker, Stars) + Settings + onboarding + company pages (Top Role Fits, ~Pay at Each Level, Last Intern Cycle) + both season-close versions.
+- Live data: 247 company boards on Greenhouse, Lever and Ashby; 864 internships, every link verified on the latest pull; 230 US business internships visible today. Daily pull script + GitHub Action; dated snapshots committed; history builds the "Last Intern Cycle" dataset.
+- Demo data: 2,520 fictional postings with a year of history, labeled "Demo data" everywhere; Home renders it in ~100–160 ms.
+- Fit model: Perfect requires a resume ↔ requirements match and eligibility; career + industry never produce Perfect (2,000-case property test); class year is fit, with "Not eligible yet" in Non-fit; every tier explains itself (Why).
+- Opened → Applied by return prompt or forwarded email; tracker moves by email with "moved by email" + undo; drag-and-drop with mouse and keyboard; denied roles never repopulate, including reposts.
+- New Stars glow (breathing gold halo; static under reduced motion) for new roles, windows opening within 7 days (company or role group), and deadlines on unapplied roles; clears per card on click.
+- Model calls go through one provider interface; the deterministic mock is the default, so everything runs offline.
+
+**Definition of Done (section 9)**
+| Item | Result | Evidence |
+|---|---|---|
+| All tabs, Settings, onboarding, both season closes reachable | Pass | e2e personas + app specs |
+| Section 3 flows end to end, offline (demo) and online (live) | Pass | personas spec (demo); live spec + live pull |
+| Fit model rules | Pass | fit.test.ts (property test), personas spec |
+| Denied never repopulates, incl. reposts | Pass | store.test.ts, personas repost test |
+| Opened → Applied via email fixture and via return prompt | Pass | personas (Jordan, Maya), store.test.ts |
+| New Stars glow per trigger, clears per card | Pass | intel.test.ts, personas (Maya stars) |
+| Every visible link resolved on the latest pull | Pass | quality link test (demo), live spec (real data) |
+| Light + dark complete | Pass | 4 projects, screenshot review |
+| WCAG AA, keyboard, focus, reduced motion, SR labels | Pass | tokens.test.ts (62 pairs), axe on every screen × 4, keyboard + motion tests |
+| Desktop + mobile, no horizontal scroll, no dead right padding | Pass | layout tests on every screen |
+| Zero console errors/warnings; typecheck, lint, unit, e2e | Pass | gate runs |
+| Home < 1 s with 2,000+ listings | Pass (~0.1 s) | perf test |
+| Empty, loading, error, zero-roles states designed | Pass | screenshot review |
+| Cold-start/approximate data labeled | Pass | "tracking since", "Not enough history yet", "~" pay with source |
+| Section 8 + section 10 | Pass (section 8 waived by the human) | see decisions log |
+| PROGRESS.md summary; DESIGN_DIRECTION.md decisions | Pass | this file; DESIGN_DIRECTION.md §1–8 |
+
+**Honest limits (by design or outside this build)**
+- **Evan's guidance:** never provided; the human said it won't come. Section 8 is treated as waived by that decision.
+- **Inbound email:** each user has a forwarding address, but no mail service receives it yet. The full pipeline runs behind an interface and is exercised by the paste tool and fixture emails. The UI says so.
+- **Notification delivery:** the composer (never sends "0 new"), preferences and a live preview exist. Sending push or email needs a backend, which isn't part of this build.
+- **Workday/Taleo/iCIMS:** most banks, Big 4 and big corporates use these and expose no public board, so they aren't covered. Documented in docs/DATA_PIPELINE.md; the adapter interface is ready for them.
+- **Link checks:** about 300 employer sites block scripted requests (403). Those links are confirmed live through the company's own ATS board listing instead of loading the page.
+- **History:** live tracking started 2026-10-15, so live seasons and windows show cold-start labels until history accumulates. The demo shows the full experience.
+- **Full-time pay:** pay by level is labeled "later" (U.S. DOL H-1B data).
+- **Not pushed:** the repo has no remote, and the GitHub Action is ready for one. Snapshots are about 4 MB a day.
+
 ## 2026-10-15 06:30 — Phase 4 playtest done, Phase 5 fix loop
 **Playwright suite** (e2e/): 42 tests × 4 projects (desktop/mobile × light/dark) = 168. Personas 1–5 from the brief, plus quality (link check, axe WCAG 2 A/AA on every screen, keyboard, focus outlines, no horizontal scroll, right gutter = left gutter, reduced motion, perf), tracker drag (mouse + keyboard), resume files, app screens, and a live-data link check. Every test fails on any console error/warning, page error or failed request.
 **Perf:** Home with 2,400 demo listings renders in ~120–160 ms (median of 3, every project). Budget is 1 s.
