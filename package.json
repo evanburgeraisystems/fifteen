@@ -19,7 +19,8 @@
     "pull": "node scripts/pull.ts",
     "demo-data": "node scripts/make-demo.ts",
     "verify:links": "node scripts/verify-links.ts",
-    "check": "npm run typecheck && npm run lint && npm run test && npm run e2e"
+    "check": "npm run typecheck && npm run lint && npm run test && npm run e2e",
+    "gate": "node scripts/gate.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
