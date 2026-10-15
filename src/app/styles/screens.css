@@ -457,6 +457,10 @@
   padding: var(--s-4);
 }
 
+.drop-sample {
+  margin-top: var(--s-2);
+}
+
 .drop-title {
   color: var(--ink);
   font-weight: 650;

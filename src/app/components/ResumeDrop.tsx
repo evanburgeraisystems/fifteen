@@ -3,13 +3,17 @@ import { getProvider } from '../../core/provider/index.ts';
 import { extractResumeText, ResumeReadError } from '../../core/resume/extract.ts';
 import { parseProfile } from '../../core/resume/profile.ts';
 import type { Profile } from '../../core/types.ts';
+import { SAMPLE_RESUME_NAME, SAMPLE_RESUME_TEXT } from '../data/sample-resume.ts';
 import { Icon } from './Icon.tsx';
 
 const provider = getProvider(import.meta.env as Record<string, string | undefined>);
 
 async function readProfile(file: File, nowIso: string): Promise<Profile> {
   // extract.ts lazy-loads pdf.js/mammoth itself, only when a file is dropped.
-  const text = await extractResumeText(file);
+  return profileFromText(await extractResumeText(file), nowIso);
+}
+
+async function profileFromText(text: string, nowIso: string): Promise<Profile> {
   const fromModel = await provider.extractProfile(text, nowIso);
   return { ...parseProfile(text, nowIso), ...(fromModel ?? {}) };
 }
@@ -38,6 +42,16 @@ export function ResumeDrop({
       onParsed(p, file.name);
     } catch (e) {
       setError(e instanceof ResumeReadError ? e.message : 'We couldn’t read that file. Try a PDF or Word (.docx) export.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const trySample = async () => {
+    setBusy(true);
+    setError(null);
+    try {
+      onParsed(await profileFromText(SAMPLE_RESUME_TEXT, nowIso), SAMPLE_RESUME_NAME);
     } finally {
       setBusy(false);
     }
@@ -81,6 +95,12 @@ export function ResumeDrop({
           }}
         />
       </div>
+      <p className="field-hint drop-sample">
+        No resume handy?{' '}
+        <button type="button" className="link-btn" disabled={busy} onClick={() => void trySample()}>
+          Try a sample resume
+        </button>
+      </p>
       {error ? (
         <p className="form-error" role="alert">
           <Icon name="alert" size={16} /> {error}

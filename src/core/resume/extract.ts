@@ -42,11 +42,15 @@ export function friendlyUnsupportedMessage(name: string): string {
   return 'Please upload your resume as a PDF or a Word (.docx) file.';
 }
 
-/** pdf.js and mammoth are loaded on first use, so the main bundle stays small until a resume is dropped. */
-let pdfjsModule: Promise<typeof import('pdfjs-dist')> | null = null;
-function loadPdfjs(): Promise<typeof import('pdfjs-dist')> {
-  pdfjsModule ??= import('pdfjs-dist').then((m) => {
-    m.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
+/**
+ * pdf.js and mammoth are loaded on first use, so the main bundle stays small until a resume is dropped.
+ * The legacy build: the modern pdf.js 5 build fails on phones a few OS versions behind (older iOS Safari).
+ */
+type Pdfjs = typeof import('pdfjs-dist/legacy/build/pdf.mjs');
+let pdfjsModule: Promise<Pdfjs> | null = null;
+function loadPdfjs(): Promise<Pdfjs> {
+  pdfjsModule ??= import('pdfjs-dist/legacy/build/pdf.mjs').then((m) => {
+    m.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/legacy/build/pdf.worker.min.mjs', import.meta.url).toString();
     return m;
   });
   return pdfjsModule;
