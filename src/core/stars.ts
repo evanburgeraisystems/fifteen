@@ -6,8 +6,9 @@
  *   - a deadline is approaching on a role they haven't applied to
  * Clicking the card acknowledges everything up to now; only a later event re-lights it.
  */
-import { addDays, daysBetween, fmtMonthDay, type CompanyWindow } from './windows.ts';
-import type { Posting } from './types.ts';
+import { labelCareer } from './taxonomy.ts';
+import { addDays, daysBetween, fmtMonthDay, plusYear, type CompanyWindow } from './windows.ts';
+import type { CareerId, HistoryRole, Posting } from './types.ts';
 
 export type StarEventKind = 'new-role' | 'window-soon' | 'deadline';
 
@@ -32,6 +33,7 @@ export function starEvents(
   window: CompanyWindow,
   appliedIds: Set<string>,
   todayIso: string,
+  lastCycleRoles: HistoryRole[] = [],
 ): StarEvent[] {
   const today = todayIso.slice(0, 10);
   const events: StarEvent[] = [];
@@ -49,6 +51,27 @@ export function starEvents(
         kind: 'window-soon',
         at: addDays(window.predictedOpen, -7),
         text: `Window likely opens ~${fmtMonthDay(window.predictedOpen)}`,
+      });
+    }
+  }
+
+  // Role groups that opened last year but aren't posted yet, even when other roles are live.
+  if (window.status === 'open') {
+    const liveTitles = new Set(mine.map((p) => p.normalizedTitle));
+    const byCareer = new Map<CareerId, string>();
+    for (const r of lastCycleRoles) {
+      if (r.companySlug !== slug || liveTitles.has(r.normalizedTitle)) continue;
+      const predicted = plusYear(r.opened);
+      const d = daysBetween(today, predicted);
+      if (d < 0 || d > 7) continue;
+      const cur = byCareer.get(r.career);
+      if (!cur || predicted < cur) byCareer.set(r.career, predicted);
+    }
+    for (const [career, predicted] of byCareer) {
+      events.push({
+        kind: 'window-soon',
+        at: addDays(predicted, -7),
+        text: `${labelCareer(career)} roles likely open ~${fmtMonthDay(predicted)}`,
       });
     }
   }

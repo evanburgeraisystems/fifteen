@@ -95,6 +95,6 @@ export function summarize(events: StarView['fresh']): string {
   const parts: string[] = [];
   if (roles) parts.push(`${roles} new role${roles === 1 ? '' : 's'}`);
   if (deadlines) parts.push(`${deadlines} deadline${deadlines === 1 ? '' : 's'} soon`);
-  if (win) parts.push(win.text.replace('Window likely opens', 'opens'));
+  if (win) parts.push(win.text.replace('Window likely opens', 'opens').replace(' roles likely open', ' opens'));
   return parts.join(' · ');
 }

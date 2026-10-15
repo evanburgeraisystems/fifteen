@@ -52,8 +52,9 @@ const P: Record<IconName, ReactElement> = {
   'star-filled': <path d="m10 3 2.1 4.4 4.8.6-3.5 3.3.9 4.8L10 13.8l-4.3 2.3.9-4.8L3.1 8l4.8-.6z" fill="currentColor" strokeLinejoin="round" />,
   settings: (
     <>
-      <circle cx="10" cy="10" r="2.5" />
-      <path d="M10 2.75v2M10 15.25v2M17.25 10h-2M4.75 10h-2M15.1 4.9l-1.4 1.4M6.3 13.7l-1.4 1.4M15.1 15.1l-1.4-1.4M6.3 6.3 4.9 4.9" />
+      <path d="M3.5 6h6.5M14 6h2.5M3.5 14h2.5M10 14h6.5" />
+      <circle cx="12" cy="6" r="2" />
+      <circle cx="8" cy="14" r="2" />
     </>
   ),
   search: (

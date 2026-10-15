@@ -69,11 +69,15 @@ export function SeasonClose() {
         <p className="season-lead">
           Every application this season made the next one faster. Here’s what moved, and what opens next.
         </p>
-        <div className="season-stats" role="list" aria-label="What moved this season">
-          <Stat n={stats.applied} label="applications sent" />
-          <Stat n={stats.assessments} label="assessments reached" />
-          <Stat n={stats.interviews} label="interviews reached" />
-        </div>
+        {stats.applied > 0 ? (
+          <div className="season-stats" role="list" aria-label="What moved this season">
+            <Stat n={stats.applied} label="applications sent" />
+            <Stat n={stats.assessments} label="assessments reached" />
+            <Stat n={stats.interviews} label="interviews reached" />
+          </div>
+        ) : (
+          <p className="muted">Nothing tracked this season yet. Applications you confirm will show up here.</p>
+        )}
         <section className="season-next" aria-labelledby="next-h">
           <h2 id="next-h" className="section-title">
             When your stars open next

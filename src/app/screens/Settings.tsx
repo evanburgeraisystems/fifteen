@@ -27,6 +27,7 @@ export function Settings() {
         <p className="page-sub">Everything here is saved on this device. Fifteen is free for students.</p>
       </header>
 
+      <div className="settings-grid">
       <TargetsSection key={JSON.stringify(state.targets)} />
       <ResumeSection key={state.resumeName ?? 'none'} />
 
@@ -96,6 +97,7 @@ export function Settings() {
         <p className="field-hint">Clears your resume, targets, stars and tracker from this device.</p>
         <ResetButton />
       </section>
+      </div>
       <p className="field-hint settings-foot">
         {ds.isDemo ? 'Running on demo data.' : `Listings pulled ${fmtDate(ds.snapshot.pulledAt)}.`} Tracking since {fmtDate(ds.snapshot.trackingSince)}.
       </p>

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { starEvents, unacknowledged, type StarEvent } from '../../core/stars.ts';
-import { predictCompanyWindow, type CompanyWindow } from '../../core/windows.ts';
+import { companyRolesByCycle, predictCompanyWindow, previousCycle, type CompanyWindow } from '../../core/windows.ts';
 import { useApp } from './app-context.tsx';
 
 export interface StarView {
@@ -21,7 +21,8 @@ export function useStarViews(): StarView[] {
     return Object.entries(state.stars)
       .map(([slug, st]) => {
         const window = predictCompanyWindow(slug, ds.visible, ds.history, now);
-        const events = starEvents(slug, ds.visible, window, applied, now);
+        const last = companyRolesByCycle(ds.history, slug, previousCycle(now));
+        const events = starEvents(slug, ds.visible, window, applied, now, last);
         return { slug, name: st.name, alerts: st.alerts, window, events, fresh: unacknowledged(events, st) };
       })
       .sort((a, b) => b.fresh.length - a.fresh.length || a.name.localeCompare(b.name));

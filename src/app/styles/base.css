@@ -1340,10 +1340,12 @@ main {
 
   .home-stars .star-list {
     grid-auto-flow: column;
-    grid-auto-columns: minmax(200px, 1fr);
+    grid-auto-columns: minmax(220px, 1fr);
     overflow-x: auto;
     overscroll-behavior-x: contain;
-    padding-bottom: var(--s-1);
+    /* room for the gold halo inside the scroller */
+    margin: calc(var(--s-4) * -1);
+    padding: var(--s-4);
   }
 }
 
@@ -1397,6 +1399,23 @@ main {
 
   .today-stat .num {
     font-size: var(--t-3xl);
+  }
+
+  .toolbar {
+    gap: var(--s-2);
+  }
+
+  .filter-btn {
+    height: 30px;
+    max-width: 100%;
+  }
+
+  .filter-btn .k {
+    display: none;
+  }
+
+  .season {
+    flex-basis: 100%;
   }
 
   .prompt {

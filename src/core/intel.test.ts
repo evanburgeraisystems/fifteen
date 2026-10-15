@@ -142,3 +142,15 @@ describe('notifications', () => {
     expect(composeNotification(weekly, { newByTier: { perfect: 0, almost: 0, weak: 0 }, starCompanies: [], todayIso: '2026-10-19T00:00:00Z', weekNewTotal: 0 })).toBeNull();
   });
 });
+
+describe('star trigger for unposted role groups', () => {
+  it('fires when a company is open but last year’s consulting roles are not posted yet', () => {
+    const live = [p({ id: 'live', title: 'Strategy Intern', normalizedTitle: 'strategy intern', classification: { industry: 'consulting', career: 'strategy', family: 'business', method: 'rules', confidence: 1, evidence: [] } })];
+    const w = predictCompanyWindow('halcyon', live, null, TODAY);
+    expect(w.status).toBe('open');
+    const ev = starEvents('halcyon', live, w, new Set(), TODAY, [role({ opened: '2025-10-19' }), role({ opened: '2025-06-01', normalizedTitle: 'old' })]);
+    const soon = ev.filter((e) => e.kind === 'window-soon');
+    expect(soon).toHaveLength(1);
+    expect(soon[0]?.text).toBe('Consulting roles likely open ~Oct 19');
+  });
+});

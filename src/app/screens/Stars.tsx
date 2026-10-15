@@ -7,6 +7,7 @@ import { Icon } from '../components/Icon.tsx';
 import { useApp } from '../state/app-context.tsx';
 import { actions } from '../state/store.ts';
 import { useStarViews, type StarView } from '../state/use-stars.ts';
+import { summarize } from '../components/NewStars.tsx';
 
 export function Stars() {
   const { companies, state, ds } = useApp();
@@ -124,11 +125,25 @@ function StarCard({ view }: { view: StarView }) {
         {view.window.status === 'open' ? <span className="muted"> · {view.window.openCount} roles</span> : null}
       </p>
       {glowing ? (
-        <ul className="star-news">
-          {view.fresh.map((e) => (
-            <li key={`${e.kind}-${e.text}`}>{e.text}</li>
-          ))}
-        </ul>
+        <div className="star-news" data-testid="star-news">
+          <p className="star-news-sum">{summarize(view.fresh)}</p>
+          <ul>
+            {view.fresh.slice(0, 3).map((e) => (
+              <li key={`${e.kind}-${e.text}`}>{e.text}</li>
+            ))}
+          </ul>
+          {view.fresh.length > 3 ? <p className="field-hint">+{view.fresh.length - 3} more on the company page</p> : null}
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              actions.ackStar(view.slug, ds.nowIso());
+            }}
+          >
+            Mark seen
+          </button>
+        </div>
       ) : null}
 
       <div className="star-links">
