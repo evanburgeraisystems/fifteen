@@ -23,7 +23,7 @@ export function NewStars() {
       {views.length === 0 ? (
         <div className="lane-empty">
           <p>Star companies to see when they post, open or close.</p>
-          <p style={{ marginTop: 'var(--s-2)' }}>
+          <p className="lane-empty-link">
             <Link to="/stars">Find companies</Link>
           </p>
         </div>
@@ -73,7 +73,7 @@ function StarItem({ view }: { view: StarView }) {
         </span>
       </button>
       {lines && lines.length ? (
-        <ul className="why" style={{ listStyle: 'none', paddingLeft: 'var(--s-3)' }}>
+        <ul className="why star-reveal">
           {lines.map((t) => (
             <li key={t}>{t}</li>
           ))}

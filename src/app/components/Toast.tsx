@@ -1,4 +1,5 @@
 import { useEffect, useSyncExternalStore } from 'react';
+import { Icon } from './Icon.tsx';
 
 export interface ToastMsg {
   id: number;
@@ -55,15 +56,14 @@ export function ToastHost() {
       ) : null}
       <button
         type="button"
-        className="icon-btn"
+        className="icon-btn toast-x"
         aria-label="Dismiss"
-        style={{ color: 'inherit' }}
         onClick={() => {
           current = null;
           emit();
         }}
       >
-        ×
+        <Icon name="x" size={14} />
       </button>
     </div>
   );

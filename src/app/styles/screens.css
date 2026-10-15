@@ -1163,3 +1163,20 @@ code {
     flex-basis: 100%;
   }
 }
+
+.mini-select:focus-visible,
+.filter-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.forward-steps summary:hover,
+.dev-tool summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.forward-steps summary:active,
+.dev-tool summary:active {
+  color: var(--ink);
+}

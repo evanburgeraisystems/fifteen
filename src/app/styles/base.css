@@ -1453,3 +1453,69 @@ main {
     animation: none !important;
   }
 }
+
+/* ---------------- interaction-state completeness ---------------- */
+a:active {
+  color: var(--ink);
+}
+
+.brand:hover .brand-tile {
+  filter: brightness(1.08);
+}
+
+.brand:active .brand-tile {
+  filter: brightness(0.92);
+}
+
+.job-title a:active {
+  color: var(--primary-active);
+}
+
+.mini-select:active:not(:disabled),
+select.filter-btn:active:not(:disabled) {
+  background: var(--surface-3);
+}
+
+.mini-select:disabled,
+select.filter-btn:disabled,
+.chip-add:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.chip-x:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.nav a:focus-visible,
+.tabbar a:focus-visible,
+.subnav a:focus-visible {
+  outline-offset: -2px;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.input[type='search']:active:not(:disabled) {
+  border-color: var(--primary);
+}
+
+.star-reveal {
+  list-style: none;
+  padding-left: var(--s-3);
+}
+
+.lane-empty-link {
+  margin-top: var(--s-2);
+}
+
+.toast-x {
+  color: inherit;
+}
+
+.toast-x:hover:not(:disabled) {
+  color: inherit;
+  background: color-mix(in srgb, var(--bg) 16%, transparent);
+}

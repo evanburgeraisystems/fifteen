@@ -1,4 +1,6 @@
 import type { CompanySeed, Posting, Snapshot, SourceRunResult } from '../types.ts';
+import { getProvider, type ModelProvider } from '../provider/index.ts';
+import { refineWithModel } from './model-fallback.ts';
 import { ADAPTERS } from './index.ts';
 import { normalizeJob } from './normalize.ts';
 import { buildPreviousMap, readSnapshots, trackingSinceFor, writeSnapshotFiles } from './snapshot.ts';
@@ -23,6 +25,8 @@ export interface PipelineOptions {
   /** Skip writing files (dry run). Default true. */
   write?: boolean;
   log?: (line: string) => void;
+  /** Model provider for low-confidence classification. Default: from FIFTEEN_MODEL_PROVIDER (mock). */
+  provider?: ModelProvider;
 }
 
 export interface CompanyOutcome {
@@ -94,6 +98,11 @@ export async function runPipeline(opts: PipelineOptions): Promise<PipelineResult
     }
     outcomes.push({ seed: r.seed, ok: r.ok, fetched: r.fetched, internships: r.ok ? postings.length : 0, carried, error: r.error });
   }
+
+  // 2b. Rules first, model second: refine low-confidence classifications.
+  const provider = opts.provider ?? getProvider(process.env);
+  const refined = await refineWithModel(all, provider);
+  if (refined) log(`  ${refined} classification${refined === 1 ? '' : 's'} refined by the ${provider.name} provider`);
 
   // 3. Verify links. Boards we just read tell us which ids are open, so a bot-blocked employer site needs no extra request.
   const known = new Map<string, ReadonlySet<string>>();
