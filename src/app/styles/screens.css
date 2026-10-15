@@ -1150,8 +1150,16 @@ code {
   }
 
   .season-stats {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--s-4);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-3);
+  }
+
+  .season-stat .num {
+    font-size: var(--t-3xl);
+  }
+
+  .season-stat {
+    font-size: var(--t-sm);
   }
 
   .tl-months,

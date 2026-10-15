@@ -1,4 +1,5 @@
 import { useEffect, useSyncExternalStore } from 'react';
+import { useLocation } from 'react-router';
 import { Icon } from './Icon.tsx';
 
 export interface ToastMsg {
@@ -19,6 +20,14 @@ export function toast(text: string, action?: ToastMsg['action']): void {
 }
 
 export function ToastHost() {
+  const { pathname } = useLocation();
+  // A toast belongs to the screen that raised it.
+  useEffect(() => {
+    if (current) {
+      current = null;
+      emit();
+    }
+  }, [pathname]);
   const msg = useSyncExternalStore(
     (l) => {
       subs.add(l);
