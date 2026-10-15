@@ -13,7 +13,7 @@
  *  - Every tier is explainable: matched and missing signals are returned.
  */
 import { currentSpring, gradYearFor } from './cycle.ts';
-import { hourly } from './pay.ts';
+import { HOURS_PER_YEAR, hourly } from './pay.ts';
 import { findSignals, isScored, signalLabel } from './signals.ts';
 import type { FitResult, FitTier, Posting, Profile, SignalId, Targets } from './types.ts';
 
@@ -199,7 +199,11 @@ export function scoreFit(posting: Posting, me: ProfileSignals, targets: Targets,
   const rate = hourly(posting.compensation);
   if (floor != null && rate != null && rate < floor) {
     score -= 20;
-    reasons.push(`Lists ~$${Math.round(rate)}/hr, under your $${floor}/hr floor.`);
+    reasons.push(
+      targets.payFloorUnit === 'year'
+        ? `Lists ~$${Math.round((rate * HOURS_PER_YEAR) / 1000)}k/yr, under your $${Math.round((floor * HOURS_PER_YEAR) / 1000)}k/yr floor.`
+        : `Lists ~$${Math.round(rate)}/hr, under your $${floor}/hr floor.`,
+    );
   }
   score = Math.max(0, score);
   score = Math.round(Math.min(100, score));

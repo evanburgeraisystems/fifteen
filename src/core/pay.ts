@@ -6,7 +6,8 @@
 import { labelCareer } from './taxonomy.ts';
 import type { CareerId, Compensation, HistoryRole, Posting } from './types.ts';
 
-const HOURS: Record<Compensation['unit'], number> = { hour: 1, week: 40, month: 173, year: 2080 };
+export const HOURS_PER_YEAR = 2080;
+const HOURS: Record<Compensation['unit'], number> = { hour: 1, week: 40, month: 173, year: HOURS_PER_YEAR };
 
 /** Midpoint hourly rate in USD, or null if unusable. */
 export function hourly(c: Compensation | null): number | null {

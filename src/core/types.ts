@@ -237,7 +237,10 @@ export interface Targets {
   industries: IndustryId[];
   careers: CareerId[];
   cities: CityId[];
+  /** Always stored hourly; a salary floor is converted at 2,080 hours (40-hour weeks). */
   payFloorHourly: number | null;
+  /** How the student entered the floor. Missing on saved state from before salary floors = 'hour'. */
+  payFloorUnit?: 'hour' | 'year';
 }
 
 export type FitTier = 'perfect' | 'almost' | 'weak' | 'nonfit';

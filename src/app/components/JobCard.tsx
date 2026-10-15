@@ -93,6 +93,16 @@ export function JobCard({ item, showFit = false }: { item: Ranked; showFit?: boo
           <Icon name="info" size={15} />
         </button>
         <StarButton slug={p.companySlug} name={p.company} />
+        <a
+          className="btn btn-primary btn-sm job-apply"
+          href={p.applyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => actions.markOpened(p.id, now)}
+          aria-label={`Apply: ${p.title} at ${p.company}. Opens ${p.company}'s posting in a new tab`}
+        >
+          Apply
+        </a>
       </div>
       <h3 className="job-title">
         <a
@@ -126,6 +136,7 @@ export function JobCard({ item, showFit = false }: { item: Ranked; showFit?: boo
           {verifiedLabel(p.linkVerifiedAt, now)}
         </span>
       </div>
+      {fit.tier === 'almost' && fit.gap ? <p className="job-gap">One gap: {fit.gap}</p> : null}
       {open ? (
         <div className="why" id={whyId}>
           <ul>
