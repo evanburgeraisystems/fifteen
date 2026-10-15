@@ -12,6 +12,30 @@ Written for a quick skim on a phone. Newest entry on top.
 
 ---
 
+## 2026-10-15 06:30 — Phase 4 playtest done, Phase 5 fix loop
+**Playwright suite** (e2e/): 42 tests × 4 projects (desktop/mobile × light/dark) = 168. Personas 1–5 from the brief, plus quality (link check, axe WCAG 2 A/AA on every screen, keyboard, focus outlines, no horizontal scroll, right gutter = left gutter, reduced motion, perf), tracker drag (mouse + keyboard), resume files, app screens, and a live-data link check. Every test fails on any console error/warning, page error or failed request.
+**Perf:** Home with 2,400 demo listings renders in ~120–160 ms (median of 3, every project). Budget is 1 s.
+
+**Findings from the harsh screenshot review + the suite, all fixed:**
+| # | Finding | Fix |
+|---|---|---|
+| 1 | Freshman whose new roles were all Non-fit saw "No new roles today" | New-today counts Non-fit; zero-day sentence only when nothing is new |
+| 2 | Every PDF upload logged a pdf.js font warning | Ship pdf.js standard fonts via a Vite plugin; extractor points at them |
+| 3 | Demo links opened "posting not found" in a fresh tab | Demo posting pages always load demo data |
+| 4 | First Tab skipped the skip link (focus jumped to main on load) | Focus moves to main only on later navigations |
+| 5 | "/" from another screen didn't focus search | Navigation focus skips URLs that ask a field to focus |
+| 6 | Keyboard drag couldn't reach an empty column from a low card | Arrows move a card a whole column |
+| 7 | Two tabs could overwrite each other's state | Store reloads on the storage event |
+| 8 | Congrats page wasted the right half; share card showed "0 interviews" | Two-column season close; share card hides zero stats |
+| 9 | "Show 16 more of 16", "2400" without separators | Copy + number formatting |
+| 10 | Toast followed you to the next screen | Toasts clear on navigation |
+| 11 | Mobile no-offer stats stacked with huge gaps | Three-across compact stats |
+| 12 | Live data: non-US roles (Tokyo, m/w/d) | App shows US-or-remote only; data keeps all |
+| 13 | Live data: "early career" new-grad roles counted as internships; hardware interns in People & HR | Classifier fixes + regression tests |
+| 14 | First live pull marked every role "New today" | First tracked day uses the employer's posted date |
+
+**Live data now:** 247 seed boards (Greenhouse 179, Lever 29, Ashby 39), 864 internships, every link verified, 230 US business internships from 59 companies.
+
 ## 2026-10-15 03:40 — Phase 3 screens built; Phase 4 journeys running
 **Done**
 - Every screen: onboarding (resume → confirm + targets → optional forwarding → optional stars → populate), Home (filters, season strip, new-today numbers, legend once, 4 always-open lanes, New Stars ¼ column), Every Job Listing (search, filters, posted date, "add to targets" offer), Tracker (Opened tray, 5 columns, drag-and-drop incl. keyboard, move menu, notes, "moved by email" + undo), Stars (galaxy, window status, top role fits, pay, last cycle, alerts), company pages, Settings, season close (offer + no-offer), demo posting page, designed loading/error/empty/zero states.

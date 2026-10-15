@@ -9,12 +9,6 @@ import { join } from 'node:path';
 import { SCREEN_DIR } from './data.ts';
 import { settle } from './app.ts';
 
-/**
- * Investigation aid only: E2E_IGNORE=substring1,substring2 drops matching problems so one known
- * app bug does not hide every other failure. Unset in normal and CI runs.
- */
-const IGNORE = (process.env.E2E_IGNORE ?? '').split(',').map((s) => s.trim()).filter(Boolean);
-
 export type Shoot = (step: string, page?: Page) => Promise<void>;
 
 interface Fixtures {
@@ -68,8 +62,7 @@ export const test = base.extend<Fixtures>({
         if (p !== page) watch(p);
       });
       await provide(undefined);
-      const real = problems.filter((m) => !IGNORE.some((i) => m.includes(i)));
-      expect(real, 'console errors, warnings, page errors or failed same-origin requests').toEqual([]);
+      expect(problems, 'console errors, warnings, page errors or failed same-origin requests').toEqual([]);
     },
     { auto: true },
   ],

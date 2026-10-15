@@ -77,32 +77,26 @@ test.describe('Tracker', () => {
     await expect(page.getByTestId('col-assessment').getByTestId(`card-${a}`)).toBeVisible();
   });
 
-  test('keyboard drag: grip, Space, arrow keys, Space', async ({ page, shots }) => {
+  test('keyboard drag: one arrow press moves a card one whole column, even the lowest card', async ({ page, shots }) => {
     const shoot = shots('tracker-keyboard');
     await onboard(page, PRIYA);
-    const [a] = await twoApplied(page);
+    // The second id is the LOWER card in the Applied column: it used to be unable to reach an empty column.
+    const [, low] = await twoApplied(page);
 
-    const grip = trackerCard(page, a).getByRole('button', { name: /^Drag / });
+    const grip = trackerCard(page, low).getByRole('button', { name: /^Drag / });
     await grip.focus();
     await expect(grip).toBeFocused();
     await page.keyboard.press('Space');
     await expect(grip).toHaveAttribute('aria-pressed', 'true');
-    // Each arrow press moves the card 25px; keep going until it is over the Assessment column.
     const assessment = page.getByTestId('col-assessment');
-    // Columns sit side by side on desktop and stack on a phone, so the way "next column" lies differs.
+    // Columns sit side by side on desktop and stack on a phone; either arrow direction works.
     const stacked = ((await assessment.boundingBox())?.y ?? 0) > ((await page.getByTestId('col-applied').boundingBox())?.y ?? 0) + 20;
-    const key = stacked ? 'ArrowDown' : 'ArrowRight';
-    let over = false;
-    for (let i = 0; i < 60 && !over; i++) {
-      await page.keyboard.press(key);
-      await page.waitForTimeout(80); // on a phone the page scrolls to follow the card; give it a beat
-      over = ((await assessment.getAttribute('class')) ?? '').includes('is-over');
-    }
-    expect(over, 'the card reached the Assessment column using only arrow keys').toBe(true);
+    await page.keyboard.press(stacked ? 'ArrowDown' : 'ArrowRight');
+    await expect(assessment).toHaveClass(/is-over/);
     await page.keyboard.press('Space');
 
-    await expect(page.getByTestId('col-assessment').getByTestId(`card-${a}`)).toBeVisible();
-    await expect(page.getByTestId('col-applied').getByTestId(`card-${a}`)).toHaveCount(0);
+    await expect(page.getByTestId('col-assessment').getByTestId(`card-${low}`)).toBeVisible();
+    await expect(page.getByTestId('col-applied').getByTestId(`card-${low}`)).toHaveCount(0);
     await shoot('keyboard-dropped');
   });
 
