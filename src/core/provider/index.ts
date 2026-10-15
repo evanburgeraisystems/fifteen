@@ -18,3 +18,13 @@ export interface ModelProvider {
 }
 
 export type ProviderEnv = Record<string, string | undefined>;
+
+import { httpProvider } from './http.ts';
+import { mockProvider } from './mock.ts';
+
+/** Pick the provider from env (process.env in Node, import.meta.env in the browser). */
+export function getProvider(env: ProviderEnv): ModelProvider {
+  const kind = env.FIFTEEN_MODEL_PROVIDER ?? 'mock';
+  if (kind === 'http' && env.FIFTEEN_MODEL_ENDPOINT) return httpProvider(env.FIFTEEN_MODEL_ENDPOINT);
+  return mockProvider;
+}

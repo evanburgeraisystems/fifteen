@@ -1,0 +1,203 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Fifteen - A Lavender Paper</title><meta name="viewport" content="width=1440"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px}
+body{font-family:'Inter Variable','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;line-height:1.4;color:#565360;background:#fff;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.card .co{font-weight:600;color:#0e0f1f;font-size:14px}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-0.02em;font-weight:700}
+
+:root{--primary:#5141d6;--ink:#0e0f1f;--text:#565360;--muted:#66646f;--border:#e8e6f0;--border-strong:#d4d1e2;--soft:#eeebfc;--subtle:#f7f6ff;--gold:#e3b341;--glow:#ffd872;--gold-ink:#7a5a10;--success:#2f7d4f}
+body{min-height:900px}
+.top{background:radial-gradient(760px 340px at 90% -8%,#ebe7fa 0%,rgba(241,235,252,.85) 38%,rgba(255,255,255,0) 74%),radial-gradient(520px 260px at 6% 0%,rgba(241,235,252,.7),rgba(255,255,255,0) 70%),#fff;border-bottom:1px solid var(--border)}
+.nav{height:64px;padding:0 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ink);letter-spacing:-0.02em}
+.logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#5141d6,#a03c8a);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;letter-spacing:-0.02em}
+.tabs{display:flex;gap:2px;padding:4px;background:#fff;border:1px solid var(--border);border-radius:999px;box-shadow:0 1px 2px rgba(14,15,31,.05)}
+.tab{display:flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;font-weight:500;color:var(--text);font-size:14px}
+.tab kbd{font:500 11px/1 system-ui;color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:2px 5px;background:var(--subtle)}
+.tab.on{background:var(--soft);color:var(--primary);font-weight:600}
+.tab.on kbd{color:var(--primary);border-color:#d9d4f7;background:#fff}
+.navr{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+.iconbtn{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--border-strong);border-radius:10px;background:#fff;color:var(--ink);font-weight:500}
+.hdr{padding:12px 24px 22px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.eyebrow{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.today{display:flex;align-items:flex-end;gap:36px}
+.stat{display:flex;align-items:baseline;gap:10px}
+.stat .n{font-size:64px;line-height:1;color:var(--ink)}
+.stat .l{font-size:16px;font-weight:600;color:var(--text)}
+.stat.p .n{background:linear-gradient(100deg,#5141d6 0%,#7a3fb6 55%,#a03c8a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.legend{margin-top:12px;font-size:13px;color:var(--muted)}
+.legend b{color:var(--border-strong);font-weight:400;margin:0 4px}
+.filters{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.chips{display:flex;gap:8px}
+.chip{display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid var(--border-strong);background:#fff;border-radius:10px;color:var(--ink);font-weight:500}
+.chip small{font-size:12px;color:var(--muted);font-weight:500}
+.chip.sel{background:var(--soft);border-color:#cfc8f6;color:var(--primary)}
+.chip.sel small{color:#5b4fc7}
+.season{display:flex;align-items:center;gap:12px;height:34px;padding:0 14px 0 5px;background:#fff;border:1px solid var(--border);border-radius:999px;color:var(--ink);font-weight:500}
+.season .pk{background:var(--primary);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 9px;border-radius:999px}
+.ticks{display:flex;gap:3px}
+.ticks i{width:14px;height:4px;border-radius:2px;background:#e4e1f3}
+.ticks i.f{background:var(--primary)}
+.main{display:grid;grid-template-columns:3fr 1fr;gap:24px;padding:22px 24px 24px}
+.lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
+.lane{background:var(--subtle);border-radius:14px;padding:12px 10px 10px}
+.rail{height:4px;border-radius:2px;margin:0 2px 12px}
+.lh{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 10px}
+.lh h2{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-0.01em}
+.lh .ct{font-size:22px;color:var(--ink)}
+.card{background:#fff;border-radius:12px;padding:11px 12px 10px;box-shadow:0 1px 2px rgba(14,15,31,.05),0 0 0 1px var(--border);margin-bottom:10px}
+.card:last-child{margin-bottom:0}
+.c1{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.role{color:var(--text);font-size:13.5px;margin-top:2px;line-height:1.35}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:6px;font-size:12.5px;color:var(--muted)}
+.c4{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid #f0eef8;font-size:12px}
+.ver{display:inline-flex;align-items:center;gap:4px;color:var(--primary);font-weight:600;text-decoration:underline;text-decoration-color:#cfc8f6;text-underline-offset:3px}
+.fit{display:inline-flex;align-items:center;gap:6px;color:var(--text);font-weight:500}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.d-perfect{background:#5141d6}.d-almost{background:#8478e3}.d-weak{background:#b9b2ef}.d-nonfit{background:#dcd9e6;box-shadow:inset 0 0 0 1px #c3bfd3}
+.st{flex:none;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;letter-spacing:.02em}
+.st-new{background:var(--primary);color:#fff}
+.st-opened{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--border-strong)}
+.st-applied{background:#e9f6ee;color:var(--success)}
+.tag{font-size:11px;font-weight:600;color:#8a3b12;background:#fdf0e6;border-radius:6px;padding:2px 7px;white-space:nowrap}
+.more{display:block;margin:10px 4px 0;font-size:12.5px;font-weight:600;color:var(--primary)}
+.stars h2{font-size:16px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;align-items:baseline;padding:12px 4px 10px}
+.stars h2 span{font-size:12.5px;font-weight:600;color:var(--gold-ink)}
+.stars{padding-top:0}
+.star{position:relative;background:linear-gradient(180deg,#fffaea,#fff6dc);border:1.5px solid var(--gold);border-radius:20px;padding:16px 18px 14px;margin-bottom:16px}
+.star.glow{box-shadow:0 0 0 5px rgba(255,216,114,.28),0 0 40px 8px rgba(255,216,114,.75)}
+.s1{display:flex;align-items:center;gap:8px}
+.sicon{color:var(--gold);display:flex}
+.sco{font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-0.01em}
+.snew{margin-left:auto;background:var(--gold);color:#3c2c05;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
+.sline{margin-top:8px;font-size:13.5px;color:#4a4437}
+.swhen{margin-top:8px;font-size:12.5px;font-weight:600;color:var(--gold-ink)}
+.note{font-size:12.5px;color:var(--muted);padding:0 4px}
+</style></head><body>
+<div class="top">
+<header class="nav">
+  <div class="brand"><span class="logo">15</span>Fifteen</div>
+  <nav class="tabs"><a class="tab on" href="#">Home <kbd>1</kbd></a><a class="tab" href="#">Every Job Listing <kbd>2</kbd></a><a class="tab" href="#">Tracker <kbd>3</kbd></a><a class="tab" href="#">Stars <kbd>4</kbd></a></nav>
+  <div class="navr"><a class="iconbtn" href="#"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>Search <kbd style="font:500 11px/1 system-ui;border:1px solid #e8e6f0;border-radius:5px;padding:2px 6px;background:#f7f6ff;color:#66646f">/</kbd></a><a class="iconbtn" href="#"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Settings</a></div>
+</header>
+<section class="hdr">
+  <div>
+    <div class="eyebrow">New today</div>
+    <div class="today">
+      <div class="stat p"><span class="n num">2</span><span class="l">Perfect</span></div>
+      <div class="stat"><span class="n num">3</span><span class="l">Almost</span></div>
+      <div class="stat"><span class="n num">6</span><span class="l">Weak</span></div>
+    </div>
+    <p class="legend">Perfect: meets every must-have <b>·</b> Almost: one gap you can close <b>·</b> Weak: a stretch <b>·</b> Non-fit: not open to you yet</p>
+  </div>
+  <div class="filters">
+    <div class="chips"><a class="chip sel" href="#"><small>Industry</small>Finance <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="chip" href="#"><small>Career</small>Investment banking <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="chip" href="#"><small>City</small>All cities <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="season"><span class="pk">PEAK</span>Finance · Peak · week 3 of 8<span class="ticks"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  </div>
+</section>
+</div>
+<main class="main">
+  <section class="lanes">
+<div class="lane"><div class="rail" style="background:#5141d6"></div><div class="lh"><h2>Perfect</h2><span class="ct num">9</span></div><article class="card">
+  <div class="c1"><span class="co">Northwind Capital</span><span class="st st-new">New</span></div>
+  <div class="role">Summer Analyst, Investment Banking</div>
+  <div class="meta"><span>New York · 2d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-perfect"></i>Perfect fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Halcyon Advisory</span><span class="st st-opened">Opened</span></div>
+  <div class="role">Strategy Intern</div>
+  <div class="meta"><span>Chicago · 1d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-perfect"></i>Perfect fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Corvid Analytics</span><span class="st st-applied">Applied</span></div>
+  <div class="role">Quant Research Intern</div>
+  <div class="meta"><span>Boston · 2d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-perfect"></i>Perfect fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Northwind Capital</span><span class="st st-new">New</span></div>
+  <div class="role">Sophomore Insight Program</div>
+  <div class="meta"><span>New York · 3d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-perfect"></i>Perfect fit</span></div>
+</article><a class="more" href="#">Show all 9</a></div>
+<div class="lane"><div class="rail" style="background:#8478e3"></div><div class="lh"><h2>Almost</h2><span class="ct num">21</span></div><article class="card">
+  <div class="c1"><span class="co">Peachtree Brands</span><span class="st st-new">New</span></div>
+  <div class="role">Brand Marketing Intern</div>
+  <div class="meta"><span>Atlanta · 2d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-almost"></i>Almost fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Larkspur Consumer Co.</span><span class="st st-opened">Opened</span></div>
+  <div class="role">Finance Rotation Intern</div>
+  <div class="meta"><span>Charlotte · 4d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-almost"></i>Almost fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Halcyon Advisory</span><span class="st st-new">New</span></div>
+  <div class="role">Business Analyst Intern</div>
+  <div class="meta"><span>Chicago · 5d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-almost"></i>Almost fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Corvid Analytics</span><span class="st st-new">New</span></div>
+  <div class="role">Data Analyst Intern</div>
+  <div class="meta"><span>Remote · 2d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-almost"></i>Almost fit</span></div>
+</article><a class="more" href="#">Show all 21</a></div>
+<div class="lane"><div class="rail" style="background:#b9b2ef"></div><div class="lh"><h2>Weak</h2><span class="ct num">46</span></div><article class="card">
+  <div class="c1"><span class="co">Magnolia Media Group</span><span class="st st-new">New</span></div>
+  <div class="role">Audience Insights Intern</div>
+  <div class="meta"><span>Nashville · 2d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-weak"></i>Weak fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Bramble &amp; Finch</span><span class="st st-new">New</span></div>
+  <div class="role">Operations Intern</div>
+  <div class="meta"><span>Richmond · 3d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-weak"></i>Weak fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Peachtree Brands</span><span class="st st-opened">Opened</span></div>
+  <div class="role">Supply Chain Intern</div>
+  <div class="meta"><span>Atlanta · 6d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-weak"></i>Weak fit</span></div>
+</article><a class="more" href="#">Show all 46</a></div>
+<div class="lane"><div class="rail" style="background:#dcd9e6"></div><div class="lh"><h2>Non-fit</h2><span class="ct num">112</span></div><article class="card">
+  <div class="c1"><span class="co">Bramble &amp; Finch</span><span class="st st-new">New</span></div>
+  <div class="role">Tax Associate Intern</div>
+  <div class="meta"><span>Richmond · 2d ago</span><span class="tag">Not eligible yet</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-nonfit"></i>Non-fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Magnolia Media Group</span><span class="st st-new">New</span></div>
+  <div class="role">Video Production Intern</div>
+  <div class="meta"><span>Nashville · 3d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-nonfit"></i>Non-fit</span></div>
+</article>
+<article class="card">
+  <div class="c1"><span class="co">Larkspur Consumer Co.</span><span class="st st-new">New</span></div>
+  <div class="role">Plant Engineering Intern</div>
+  <div class="meta"><span>Greenville · 5d ago</span></div>
+  <div class="c4"><a class="ver" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.4 6.3l2.4 2.3 4.8-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified today</a><span class="fit"><i class="dot d-nonfit"></i>Non-fit</span></div>
+</article><a class="more" href="#">Show all 112</a></div>
+  </section>
+  <aside class="stars"><h2>New Stars <span>1 new today</span></h2><article class="star glow">
+  <div class="s1"><span class="sicon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.1,8.6 22,9.4 16.9,14.2 18.3,21 12,17.5 5.7,21 7.1,14.2 2,9.4 8.9,8.6" fill="currentColor"/></svg></span><span class="sco">Northwind Capital</span><span class="snew">New</span></div>
+  <div class="sline">Summer Analyst, Investment Banking opened</div>
+  <div class="swhen">Today</div>
+</article>
+<article class="star">
+  <div class="s1"><span class="sicon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.1,8.6 22,9.4 16.9,14.2 18.3,21 12,17.5 5.7,21 7.1,14.2 2,9.4 8.9,8.6" fill="currentColor"/></svg></span><span class="sco">Halcyon Advisory</span></div>
+  <div class="sline">Strategy Intern opened</div>
+  <div class="swhen">2d ago</div>
+</article>
+<article class="star">
+  <div class="s1"><span class="sicon"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15.1,8.6 22,9.4 16.9,14.2 18.3,21 12,17.5 5.7,21 7.1,14.2 2,9.4 8.9,8.6" fill="currentColor"/></svg></span><span class="sco">Corvid Analytics</span></div>
+  <div class="sline">No new roles since Oct 11</div>
+  <div class="swhen">Checked today</div>
+</article><p class="note">Starred companies are checked every morning. A glow means something opened.</p></aside>
+</main>
+</body></html>

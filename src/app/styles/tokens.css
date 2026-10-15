@@ -1,0 +1,206 @@
+/*
+ * Fifteen design tokens. Single source of truth; src/app/styles/tokens.test.ts
+ * parses this file and checks WCAG AA for every text/surface pair in both themes.
+ * Direction: "Lavender Paper" (see DESIGN_DIRECTION.md).
+ */
+:root {
+  color-scheme: light;
+
+  /* ---- surfaces ---- */
+  --bg: #ffffff;
+  --bg-subtle: #f7f6ff;
+  --haze-1: #f1ebfc;
+  --haze-2: #ebe7fa;
+  --surface: #ffffff;
+  --surface-2: #f7f6ff;
+  --surface-3: #efedfa;
+  --surface-raised: #ffffff;
+  --grid-line: rgba(81, 65, 214, 0.045);
+  --border: #e8e6f0;
+  --border-strong: #d4d1e2;
+  --scrim: rgba(14, 15, 31, 0.32);
+
+  /* ---- text ---- */
+  --ink: #0e0f1f;
+  --text: #565360;
+  --text-muted: #66646f; /* tuned from #898891 (3.50:1) to pass AA on white and haze */
+  --text-on-primary: #ffffff;
+
+  /* ---- brand ---- */
+  --primary: #5141d6;
+  --primary-hover: #4535c4;
+  --primary-active: #3b2daf;
+  --primary-text: #5141d6;
+  --primary-soft: #eeebfc;
+  --primary-soft-hover: #e4e0fb;
+  --plum: #a03c8a;
+  --gradient: linear-gradient(100deg, #5141d6 0%, #7a3fb6 55%, #a03c8a 100%);
+  --focus: #5141d6;
+
+  /* ---- fit lanes: one purple family, intensity = fit ---- */
+  --lane-perfect: #5141d6;
+  --lane-almost: #8478e3;
+  --lane-weak: #b9b2ef;
+  --lane-nonfit: #dcd9e6;
+  --lane-perfect-ink: #ffffff;
+  --lane-perfect-soft: #eeebfc;
+
+  /* ---- stars: gold in both themes ---- */
+  --gold: #e3b341;
+  --gold-glow: #ffd872;
+  --gold-ink: #7a5a10;
+  --gold-tint: #fff8e6;
+  --gold-halo: rgba(255, 216, 114, 0.55);
+  --gold-halo-strong: rgba(255, 200, 70, 0.9);
+
+  /* ---- status ---- */
+  --success: #2f7d4f;
+  --success-soft: #e9f6ee;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+
+  /* ---- elevation (two levels only) ---- */
+  --shadow-1: 0 1px 2px rgba(14, 15, 31, 0.05), 0 0 0 1px var(--border);
+  --shadow-2: 0 12px 32px -12px rgba(14, 15, 31, 0.22), 0 0 0 1px var(--border);
+
+  /* ---- radius ---- */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-pill: 999px;
+
+  /* ---- spacing (4px base) ---- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-7: 32px;
+  --s-8: 40px;
+  --s-9: 56px;
+  --gutter: 24px;
+
+  /* ---- type ---- */
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --t-xs: 12px;
+  --t-sm: 13px;
+  --t-base: 14px;
+  --t-md: 16px;
+  --t-lg: 18px;
+  --t-xl: 22px;
+  --t-2xl: 28px;
+  --t-3xl: 36px;
+  --t-4xl: 48px;
+  --t-5xl: 64px;
+
+  /* ---- motion ---- */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 120ms;
+  --d-base: 200ms;
+  --d-slow: 320ms;
+  --d-breathe: 3200ms;
+}
+
+/* Dark = the reverse of light: ink becomes the ground, white becomes text,
+   the lavender haze becomes a deep violet glow, primary brightens for contrast. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0e0f1f;
+  --bg-subtle: #12132a;
+  --haze-1: rgba(108, 92, 231, 0.2);
+  --haze-2: rgba(160, 60, 138, 0.12);
+  --surface: #161729;
+  --surface-2: #1e1f35;
+  --surface-3: #26273f;
+  --surface-raised: #1e1f35;
+  --grid-line: rgba(180, 171, 247, 0.04);
+  --border: #2a2b42;
+  --border-strong: #3a3b57;
+  --scrim: rgba(0, 0, 0, 0.55);
+  --ink: #f4f3fa;
+  --text: #c9c7d6;
+  --text-muted: #a3a1b3;
+  --text-on-primary: #ffffff;
+  --primary: #6c5ce7;
+  --primary-hover: #6252e3;
+  --primary-active: #5747d6;
+  --primary-text: #b4abf7;
+  --primary-soft: #2a2650;
+  --primary-soft-hover: #332e60;
+  --plum: #d277bd;
+  --gradient: linear-gradient(100deg, #9d92f5 0%, #c07ad8 55%, #e08bbf 100%);
+  --focus: #b4abf7;
+  --lane-perfect: #8e80f5;
+  --lane-almost: #6e62c9;
+  --lane-weak: #4a4489;
+  --lane-nonfit: #2e2d45;
+  --lane-perfect-ink: #0e0f1f;
+  --lane-perfect-soft: #2a2650;
+  --gold-ink: #ffd872;
+  --gold-tint: #2c2615;
+  --gold-halo: rgba(255, 216, 114, 0.35);
+  --gold-halo-strong: rgba(255, 216, 114, 0.75);
+  --success: #7bd3a2;
+  --success-soft: #16301f;
+  --danger: #ff9b8f;
+  --danger-soft: #3a1a17;
+  --shadow-1: 0 0 0 1px var(--border);
+  --shadow-2: 0 16px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-strong);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) {
+    color-scheme: dark;
+    --bg: #0e0f1f;
+    --bg-subtle: #12132a;
+    --haze-1: rgba(108, 92, 231, 0.2);
+    --haze-2: rgba(160, 60, 138, 0.12);
+    --surface: #161729;
+    --surface-2: #1e1f35;
+    --surface-3: #26273f;
+    --surface-raised: #1e1f35;
+    --grid-line: rgba(180, 171, 247, 0.04);
+    --border: #2a2b42;
+    --border-strong: #3a3b57;
+    --scrim: rgba(0, 0, 0, 0.55);
+    --ink: #f4f3fa;
+    --text: #c9c7d6;
+    --text-muted: #a3a1b3;
+    --text-on-primary: #ffffff;
+    --primary: #6c5ce7;
+    --primary-hover: #6252e3;
+    --primary-active: #5747d6;
+    --primary-text: #b4abf7;
+    --primary-soft: #2a2650;
+    --primary-soft-hover: #332e60;
+    --plum: #d277bd;
+    --gradient: linear-gradient(100deg, #9d92f5 0%, #c07ad8 55%, #e08bbf 100%);
+    --focus: #b4abf7;
+    --lane-perfect: #8e80f5;
+    --lane-almost: #6e62c9;
+    --lane-weak: #4a4489;
+    --lane-nonfit: #2e2d45;
+    --lane-perfect-ink: #0e0f1f;
+    --lane-perfect-soft: #2a2650;
+    --gold-ink: #ffd872;
+    --gold-tint: #2c2615;
+    --gold-halo: rgba(255, 216, 114, 0.35);
+    --gold-halo-strong: rgba(255, 216, 114, 0.75);
+    --success: #7bd3a2;
+    --success-soft: #16301f;
+    --danger: #ff9b8f;
+    --danger-soft: #3a1a17;
+    --shadow-1: 0 0 0 1px var(--border);
+    --shadow-2: 0 16px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-strong);
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: 16px;
+  }
+}

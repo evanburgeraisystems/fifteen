@@ -1,0 +1,59 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Title (Sam Rivera - Resume) /Producer (make-resume-fixtures.ts) >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 1731 >>
+stream
+BT /F2 16 Tf 1 0 0 1 54 716.0 Tm (Sam Rivera) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 703.0 Tm (Chicago, IL | sam.rivera@example.com | \(312\) 555-0127) Tj ET
+BT /F2 11 Tf 1 0 0 1 54 679.0 Tm (EDUCATION) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 666.0 Tm (Northlake University, Chicago, IL) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 653.0 Tm (B.S. in Supply Chain Management and Economics - Expected May 2028) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 640.0 Tm (GPA: 3.5/4.0) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 627.0 Tm (Relevant Coursework: Operations Management, Logistics and Transportation, Econometrics, Database Systems) Tj ET
+BT /F2 11 Tf 1 0 0 1 54 603.0 Tm (EXPERIENCE) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 590.0 Tm (Logistics Intern, Midway Freight Solutions, Chicago, IL - Jun 2026 to Aug 2026) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 577.0 Tm (- Cut average dock-to-stock time by 14% by redesigning the receiving workflow \(process improvement\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 564.0 Tm (- Built weekly Tableau dashboards on carrier on-time performance and queried shipment data in SQL) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 551.0 Tm (- Maintained purchase orders and inventory counts in SAP) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 531.0 Tm (Teaching Assistant, Northlake University - Jan 2026 to May 2026) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 518.0 Tm (Warehouse Associate, Lakefront Distribution - 2024 to 2025) Tj ET
+BT /F2 11 Tf 1 0 0 1 54 494.0 Tm (LEADERSHIP) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 481.0 Tm (Captain, Northlake Club Volleyball) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 468.0 Tm (Treasurer, Supply Chain Management Association) Tj ET
+BT /F2 11 Tf 1 0 0 1 54 444.0 Tm (SKILLS) Tj ET
+BT /F1 10 Tf 1 0 0 1 54 431.0 Tm (Excel \(pivot tables, VLOOKUP\), SQL, Tableau, SAP, Lean Six Sigma Yellow Belt, Spanish) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000000320 00000 n 
+0000000406 00000 n 
+0000000542 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R /Info 5 0 R >>
+startxref
+2325
+%%EOF
